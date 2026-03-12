@@ -3,7 +3,7 @@ layout: post
 title: "Camera-inator"
 date: 2025-12-10
 category: 3d
-featured: false
+featured: true
 thumbnail: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773163636/CameraInator_Final_Render_ef1gch.jpg"
 description: "A hard surface modeling project for my Advanced Modeling class — had to design a Doofenshmirtz-inspired Inator, so I made the Camera-inator, a device that freezes time in the form of an image (get it?). Went for a hand-painted texture style and kept the poly count low with game asset work in mind."
 
