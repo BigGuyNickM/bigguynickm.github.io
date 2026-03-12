@@ -12,7 +12,7 @@
   --font-main:   Georgia, 'Times New Roman', serif;
   --font-accent: 'Trebuchet MS', 'Lucida Grande', sans-serif;
 
-  --sz-hero:  9.2rem;
+  --sz-hero:  clamp(4rem, 10vw, 9.2rem);
   --sz-h1:    4.8rem;
   --sz-h2:    2.6rem;
   --sz-body:  1.6rem;
@@ -26,8 +26,8 @@
 
   --section-pad-t: 50px;
   --section-pad-b: 80px;
-  --section-pad-s: 80px;
-  --post-inset:    max(80px, 15%);
+  --section-pad-s: clamp(20px, 5vw, 80px);
+  --post-inset:    max(20px, 10%);
 
   --gap-xs: 10px;
   --gap-sm: 15px;

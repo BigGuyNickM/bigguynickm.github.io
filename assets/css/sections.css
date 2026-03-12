@@ -1,6 +1,4 @@
-/* ============================================================
-   SECTION LAYOUT  (shared home + post)
-   ============================================================ */
+/* Section Layout */
 .section { padding: var(--section-pad-t) var(--section-pad-s) var(--section-pad-b); scroll-margin-top: var(--nav-height); }
 .section-content { display: flex; flex-direction: column; gap: var(--gap-lg); }
 
@@ -16,9 +14,7 @@
 
 .heading-duo { font-size: var(--sz-h1); color: var(--text); }
 
-/* ============================================================
-   POST CARD
-   ============================================================ */
+/* Post Card */
 .post-card {
   --card-theme: var(--highlight);
   position: relative;
@@ -91,9 +87,7 @@
   color: var(--text);
 }
 
-/* ============================================================
-   GALLERY  (filter bar + grid)
-   ============================================================ */
+/* Gallery */
 .filter-bar { display: flex; flex-wrap: wrap; gap: var(--gap-sm); }
 
 .filter-btn {
@@ -118,3 +112,5 @@
 @media (max-width: 1250px) { .posts-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 970px)  { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 690px)  { .posts-grid { grid-template-columns: 1fr; } }
+
+.post-card-hidden { display: none; }

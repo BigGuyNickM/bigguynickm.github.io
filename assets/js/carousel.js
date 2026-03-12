@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (card_count <= 1) {
     items[0].classList.add('active');
     track.style.transform = `translateX(calc(50% - ${items[0].offsetWidth / 2}px))`;
+    track.closest('.carousel-wrapper').classList.add('no-mask');
     return;
   }
 
