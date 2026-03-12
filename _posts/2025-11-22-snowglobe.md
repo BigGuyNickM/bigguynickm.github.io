@@ -77,7 +77,7 @@ sections:
       - type: image
         id: "model-assembly"
         title: "Full Assembly"
-        src: "snow-globe-all-together"
+        src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773340256/Snowglobe_All_Together_ndrhsh.png"
         description: "Everything assembled together before texturing."
 
       - type: text
