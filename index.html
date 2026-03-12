@@ -36,20 +36,24 @@ body_class: page-home
         {% assign featured_posts = site.posts | where: "featured", true %}
         {% assign count = featured_posts.size %}
         
-        {% for i in (1..3) %}
-          {% assign idx = count | minus: 4 | plus: i %}
-          {% assign post = featured_posts[idx] %}
-          <div class="carousel-item">{% include post-card.html url=post.url title=post.title category=post.category thumbnail=post.thumbnail date=post.date %}</div>
-        {% endfor %}
+        {% if count > 1 %}
+          {% for i in (1..3) %}
+            {% assign idx = count | minus: 4 | plus: i %}
+            {% assign post = featured_posts[idx] %}
+            <div class="carousel-item">{% include post-card.html url=post.url title=post.title category=post.category thumbnail=post.thumbnail date=post.date %}</div>
+          {% endfor %}
+        {% endif %}
 
         {% for post in featured_posts %}
           <div class="carousel-item">{% include post-card.html url=post.url title=post.title category=post.category thumbnail=post.thumbnail date=post.date %}</div>
         {% endfor %}
 
-        {% for i in (0..2) %}
-          {% assign post = featured_posts[i] %}
-          <div class="carousel-item">{% include post-card.html url=post.url title=post.title category=post.category thumbnail=post.thumbnail date=post.date %}</div>
-        {% endfor %}
+        {% if count > 1 %}
+          {% for i in (0..2) %}
+            {% assign post = featured_posts[i] %}
+            <div class="carousel-item">{% include post-card.html url=post.url title=post.title category=post.category thumbnail=post.thumbnail date=post.date %}</div>
+          {% endfor %}
+        {% endif %}
       </div>
       
       <div class="carousel-indicators" id="carousel-indicators">

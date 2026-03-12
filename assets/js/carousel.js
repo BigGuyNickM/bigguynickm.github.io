@@ -59,6 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
   items = track.querySelectorAll('.carousel-item');
   card_count = dots.length;
 
+  // single featured post — center it, no scrolling or autoplay
+  if (card_count <= 1) {
+    items[0].classList.add('active');
+    track.style.transform = `translateX(calc(50% - ${items[0].offsetWidth / 2}px))`;
+    return;
+  }
+
   dots.forEach(_dot => {
     _dot.addEventListener('click', () => {
       current_index = START_OFFSET + parseInt(_dot.dataset.idx);

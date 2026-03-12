@@ -39,7 +39,10 @@
 }
 
 .about-tools {
-  font-size: var(--sz-body);
+  font-family: var(--font-accent);
+  font-size: var(--sz-ui-md);
+  letter-spacing: var(--ls-wide);
+  font-weight: bold;
   line-height: 1;
 }
 
