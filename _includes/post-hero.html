@@ -1,0 +1,44 @@
+{% assign opt_thumb = page.thumbnail | replace: '/upload/', '/upload/f_auto,q_auto,w_1920/' %}
+<div class="post-hero" style="background-image: url('{{ opt_thumb }}')"></div>
+
+<div class="post-hero-details">
+
+  <div class="post-hero-meta">
+    <span class="post-hero-tag post-hero-tag--{{ page.category }}">{{ page.category }}</span>
+    <h1 class="post-hero-title">{{ page.title }}</h1>
+    <span class="post-hero-date">{{ page.date | date: "%B %d, %Y" }}</span>
+  </div>
+
+  <div class="separator"></div>
+
+  {% if page.description %}
+    <p class="post-description">{{ page.description }}</p>
+  {% endif %}
+
+  {% if page.details %}
+    <div class="post-details">
+      {% include heading-duo.html title="Project" accent="Details" %}
+      {% for item in page.details %}
+        <p class="post-detail-row">
+          <strong>{{ item[0] }}:</strong> {{ item[1] }}
+        </p>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if page.toc %}
+    <nav class="post-toc">
+      {% include heading-duo.html title="Table of" accent="Contents" %}
+      <ul class="post-toc-list">
+        {% for entry in page.toc %}
+          <li class="post-toc-item{% if entry.sub %} post-toc-item--sub{% endif %}">
+            <a href="#{{ entry.id }}">{{ entry.label }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
+
+  <div class="separator"></div>
+
+</div>

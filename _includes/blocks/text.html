@@ -1,0 +1,11 @@
+{% assign block = include.block %}
+
+<div class="block block--text" id="{{ block.id }}">
+  {% if block.title %}
+    <h3 class="block-title">{{ block.title }}</h3>
+  {% endif %}
+
+  {% for paragraph in block.paragraphs %}
+    <p class="block-text-body">{{ paragraph }}</p>
+  {% endfor %}
+</div>

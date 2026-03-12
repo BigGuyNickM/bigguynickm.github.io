@@ -1,0 +1,89 @@
+:root {
+  --bg:         #0D0B09;
+  --text:       #EDE8E0;
+  --text-dim:   #A09890;
+  --text-muted: #7A7468;
+  --purple:     #9B7EC8;
+  --yellow:     #F0C040;
+  --cyan:       #4EC9C0;
+  --orange:     #AE3E23;
+  --highlight:  rgba(255, 230, 160, 0.07);
+
+  --font-main:   Georgia, 'Times New Roman', serif;
+  --font-accent: 'Trebuchet MS', 'Lucida Grande', sans-serif;
+
+  --sz-hero:  9.2rem;
+  --sz-h1:    4.8rem;
+  --sz-h2:    2.6rem;
+  --sz-body:  1.6rem;
+  --sz-ui-md: 1.4rem;
+  --sz-ui-sm: 1.1rem;
+
+  --ls-tight: 0.02em;
+  --ls-mid:   0.05em;
+  --ls-wide:  0.12em;
+  --ls-extra: 0.15em;
+
+  --section-pad-t: 50px;
+  --section-pad-b: 80px;
+  --section-pad-s: 80px;
+  --post-inset:    max(80px, 15%);
+
+  --gap-xs: 10px;
+  --gap-sm: 15px;
+  --gap-ms: 15px;
+  --gap-md: 20px;
+  --gap-ml: 25px;
+  --gap-lg: 30px;
+  --gap-xl: 50px;
+
+  --nav-height: 70px;
+
+  --trans-fast: 0.2s ease;
+  --trans-mid:  0.4s ease;
+  --trans-slow: 0.6s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 62.5%; scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-accent);
+  font-size: var(--sz-body);
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-main); font-weight: normal; line-height: 1; }
+p   { font-family: var(--font-main); font-size: var(--sz-body); line-height: 2; font-weight: normal; }
+a   { color: inherit; text-decoration: none; }
+ul  { list-style: none; }
+img { display: block; max-width: 100%; }
+
+.separator { width: 100%; height: 1px; background: var(--highlight); background-clip: content-box; }
+.accent    { font-style: italic; color: var(--purple); }
+
+.hl-purple { color: var(--purple); }
+.hl-cyan   { color: var(--cyan); }
+.hl-yellow { color: var(--yellow); }
+.hl-orange { color: var(--orange); }
+.hl-text   { color: var(--text); }
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-accent);
+  font-size: var(--sz-ui-sm);
+  font-weight: bold;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  padding: 15px 40px;
+  border-radius: 30px;
+  border: 1px solid var(--text-muted);
+  color: var(--text-muted);
+  background: none;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+.btn:hover { color: var(--yellow); border-color: var(--yellow); }

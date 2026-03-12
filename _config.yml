@@ -1,0 +1,31 @@
+# Site
+title:       Nicholas Morse
+description: Portfolio of Nicholas Morse — Technical Artist, Photographer, and Game Developer.
+url:         "https://bigguynickm.github.io"
+baseurl:     ""
+lang:        en
+timezone:    America/New_York
+
+# Author
+author:
+  name:  Nicholas Morse
+  email: NDMorse45@gmail.com
+
+# Social
+github_username:   BigGuyNickM
+linkedin_username: bigguynick
+
+# Build
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+permalink: /:categories/:year/:month/:day/:title
+
+# Exclude from _site output
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .gitignore
+  - .jekyll-cache

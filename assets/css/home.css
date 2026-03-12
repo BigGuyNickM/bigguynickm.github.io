@@ -1,0 +1,73 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, transparent 50%, var(--bg) 100%),
+    linear-gradient(to right, rgba(13, 11, 9, 0.7) 0%, transparent 50%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 var(--section-pad-s) 120px;
+}
+
+.hero-name { font-family: var(--font-main); font-size: var(--sz-hero); font-weight: normal; line-height: 1; }
+.hero-name em { font-style: italic; color: var(--text-dim); }
+
+.hero-roles { margin-top: var(--gap-md); display: flex; flex-direction: column; gap: var(--gap-xs); }
+.hero-roles li {
+  font-family: var(--font-accent);
+  font-weight: bold;
+  font-size: var(--sz-ui-md);
+  letter-spacing: var(--ls-extra);
+  text-transform: uppercase;
+}
+.role-purple { color: var(--purple); }
+.role-cyan   { color: var(--cyan); }
+.role-orange { color: var(--orange); }
+.role-yellow { color: var(--yellow); }
+
+/* z-index: 1 keeps it above the ::after gradient overlay */
+.scroll-btn {
+  position: absolute;
+  bottom: var(--gap-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-xs);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-accent);
+  font-size: var(--sz-ui-sm);
+  letter-spacing: var(--ls-extra);
+  text-transform: uppercase;
+  cursor: pointer;
+  animation: scroll-bounce 1.5s ease-in-out infinite;
+}
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--text-muted), transparent); }
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+.hero-separator {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent 0%, rgba(240, 192, 64, 0.3) 50%, transparent 100%);
+}

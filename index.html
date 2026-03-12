@@ -1,0 +1,135 @@
+---
+layout: default
+title: Home
+body_class: page-home
+---
+
+<section class="hero" id="hero" style="background-image: url('https://res.cloudinary.com/dbmhdbjxa/image/upload/f_auto,q_auto/v1773077756/Destiny_xe7hoc.jpg');">
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1 class="hero-name">
+        Nicholas<br>
+        <em>Morse</em>
+      </h1>
+      <ul class="hero-roles">
+        <li class="role-purple"><span class="role-icon">◈</span> Technical Artist</li>
+        <li class="role-orange"><span class="role-icon">◉</span> Photographer</li>
+        <li class="role-cyan"><span class="role-icon">&lt;/&gt;</span> Coder</li>
+        <li class="role-yellow"><span class="role-icon">★</span> Game Developer</li>
+      </ul>
+      
+    </div>
+  </div>
+  <button class="scroll-btn" id="scroll-btn">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </button>
+</section>
+
+<div class="hero-separator"></div>
+
+<section class="section" id="featured">
+  {% include section-heading.html label="Featured" title="Project" accent="Highlights" %}
+  <div class="section-content">
+    <div class="carousel-wrapper">
+      <div class="carousel-track" id="carousel">
+        {% assign featured_posts = site.posts | where: "featured", true %}
+        {% assign count = featured_posts.size %}
+        
+        {% for i in (1..3) %}
+          {% assign idx = count | minus: 4 | plus: i %}
+          {% assign post = featured_posts[idx] %}
+          <div class="carousel-item">{% include post-card.html url=post.url title=post.title category=post.category thumbnail=post.thumbnail date=post.date %}</div>
+        {% endfor %}
+
+        {% for post in featured_posts %}
+          <div class="carousel-item">{% include post-card.html url=post.url title=post.title category=post.category thumbnail=post.thumbnail date=post.date %}</div>
+        {% endfor %}
+
+        {% for i in (0..2) %}
+          {% assign post = featured_posts[i] %}
+          <div class="carousel-item">{% include post-card.html url=post.url title=post.title category=post.category thumbnail=post.thumbnail date=post.date %}</div>
+        {% endfor %}
+      </div>
+      
+      <div class="carousel-indicators" id="carousel-indicators">
+        {% for post in featured_posts %}
+          <button class="carousel-dot {% if forloop.first %}active{% endif %}" data-idx="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></button>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  {% include section-heading.html label="All Work" title="Project" accent="Gallery" %}
+  <div class="section-content">
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="game">Games</button>
+      <button class="filter-btn" data-filter="coding">Code</button>
+      <button class="filter-btn" data-filter="3d">3D Art</button>
+      <button class="filter-btn" data-filter="photography">Photography</button>
+      <button class="filter-btn" data-filter="design">Design</button>
+    </div>
+
+    <div class="posts-grid">
+      {% for post in site.posts %}
+        {% include post-card.html
+          url=post.url
+          title=post.title
+          category=post.category
+          thumbnail=post.thumbnail
+          date=post.date
+        %}
+      {% endfor %}
+    </div>
+    <div class="gallery-footer">
+      <button class="btn" id="show-more-btn">Show More Work ↓</button>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<section class="section" id="about">
+  <div class="about-inner">
+
+    <div class="about-image-wrapper">
+      <div class="about-glow"></div>
+      <img src="https://res.cloudinary.com/dbmhdbjxa/image/upload/f_auto,q_auto/v1773106277/Me_cutout_x8gcjq.png" 
+           alt="Nicholas Morse" 
+           class="about-image">
+    </div>
+
+    <div class="about-content">
+      {% include section-heading.html label="About" title="Nicholas" accent="Morse" %}
+
+      <div class="section-content">
+        <p class="about-bio">
+          <span class="hl-yellow">Aspiring Technical Artist</span> and <span class="hl-text">Game &amp; Interactive Design junior at Alfred State College</span> with a decade+ of experience in <span class="hl-purple">3D art, digital art, graphic design</span>, and 4 years of <span class="hl-cyan">programming</span>—all converging on technical art. I love creating and have previously shipped games on Roblox that generated <span class="hl-yellow" style="font-weight: bold;"><em>$45k+</em></span> in revenue. I enjoy bridging the gap between art and code, and making things as technically sound as they look. I learn fast, adapt fast, and make much more than just games.
+        </p>
+
+        <p class="about-tools">
+          <span class="hl-purple">BLENDER</span> · 
+          <span class="hl-purple">MAYA</span> · 
+          <span class="hl-purple">SUBSTANCE PAINTER</span> · 
+          <span class="hl-orange">PHOTOSHOP</span> · 
+          <span class="hl-orange">LIGHTROOM</span> · 
+          <span class="hl-yellow">GODOT</span> · 
+          <span class="hl-cyan">JS/HTML</span> · 
+          <span class="hl-cyan">C#</span> · 
+          <span class="hl-cyan">GLSL</span> · 
+          <span class="hl-cyan">ODIN</span> · 
+          <span class="hl-cyan">PYTHON</span>
+        </p>
+
+        <div class="about-buttons">
+          <a href="mailto:NDMorse45@gmail.com" class="btn">NDMorse45@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,14 @@
+<div class="block block--image" id="{{ block.id }}">
+  {% if block.title %}
+    <h3 class="block-title">{{ block.title }}</h3>
+  {% endif %}
+
+  {% assign opt_src = block.src | replace: '/upload/', '/upload/f_auto,q_auto/' %}
+  <a class="lightbox-trigger" data-src="{{ block.src }}" data-alt="{{ block.alt | default: block.title }}" aria-label="{{ block.alt | default: block.title }}">
+    <img src="{{ opt_src }}" alt="{{ block.alt | default: block.title }}" class="block-image-img">
+  </a>
+
+  {% if block.description %}
+    <p class="block-description">{{ block.description }}</p>
+  {% endif %}
+</div>

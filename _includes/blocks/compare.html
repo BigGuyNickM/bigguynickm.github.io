@@ -1,0 +1,19 @@
+{% assign b = include.block %}
+
+<div class="block block--compare" id="{{ block.id }}">
+  {% if b.title %}<h3 class="block-title">{{ b.title }}</h3>{% endif %}
+
+  <div class="compare-wrap" data-compare>
+    <div class="compare-base">
+      <img class="lightbox-trigger" src="{{ b.before.src }}" alt="{{ b.before.alt | default: 'Before' }}" data-src="{{ b.before.src }}" data-alt="{{ b.before.alt | default: 'Before' }}">
+    </div>
+    <div class="compare-top" data-compare-top>
+      <img class="lightbox-trigger" src="{{ b.after.src }}" alt="{{ b.after.alt | default: 'After' }}" data-src="{{ b.after.src }}" data-alt="{{ b.after.alt | default: 'After' }}">
+    </div>
+    <div class="compare-divider" data-compare-divider>
+      <button class="compare-handle" data-compare-handle aria-label="Compare slider"></button>
+    </div>
+  </div>
+
+  {% if b.description %}<p class="block-description">{{ b.description }}</p>{% endif %}
+</div>

@@ -1,0 +1,15 @@
+{% assign opt_thumb = include.thumbnail | replace: '/upload/', '/upload/f_auto,q_auto,w_820/' %}
+<a href="{{ include.url }}"
+   class="post-card post-card--{{ include.category }}">
+
+  <img src="{{ opt_thumb }}" alt="{{ include.title }}" class="post-card-img" loading="lazy">
+
+  <div class="post-card-inner">
+    <span class="post-card-date">{{ include.date | date: "%b %Y" }}</span>
+    <div class="post-card-footer">
+      <span class="post-card-category">{{ include.category }}</span>
+      <h3 class="post-card-title">{{ include.title }}</h3>
+    </div>
+  </div>
+
+</a>

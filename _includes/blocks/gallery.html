@@ -1,0 +1,34 @@
+{% assign block = include.block %}
+{% assign count = block.images | size %}
+
+{% if block.columns %}
+  {% assign cols = block.columns %}
+{% elsif count == 1 %}
+  {% assign cols = 1 %}
+{% elsif count == 2 %}
+  {% assign cols = 2 %}
+{% else %}
+  {% assign cols = 3 %}
+{% endif %}
+
+<div class="block block--gallery" id="{{ block.id }}">
+  {% if block.title %}
+    <h3 class="block-title">{{ block.title }}</h3>
+  {% endif %}
+
+  <div class="block-gallery-grid block-gallery-grid--{{ cols }}">
+    {% for image in block.images %}
+      {% assign opt_src = image.src | replace: '/upload/', '/upload/f_auto,q_auto/' %}
+      <a class="lightbox-trigger block-gallery-item"
+         data-src="{{ image.src }}"
+         data-alt="{{ image.alt }}"
+         aria-label="{{ image.alt }}">
+        <img src="{{ opt_src }}" alt="{{ image.alt }}" class="block-gallery-img">
+      </a>
+    {% endfor %}
+  </div>
+
+  {% if block.description %}
+    <p class="block-description">{{ block.description }}</p>
+  {% endif %}
+</div>

@@ -1,0 +1,13 @@
+{% assign block = include.block %}
+
+<div class="block block--warning" id="{{ block.id }}">
+  {% if block.title %}
+    <h3 class="block-title">{{ block.title | default: "Warning" }}</h3>
+  {% endif %}
+
+  <p class="block-callout-text">{{ block.text }}</p>
+
+  {% if block.description %}
+    <p class="block-description">{{ block.description }}</p>
+  {% endif %}
+</div>

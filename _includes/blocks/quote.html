@@ -1,0 +1,13 @@
+{% assign block = include.block %}
+
+<div class="block block--quote" id="{{ block.id }}">
+  <p class="block-quote-text">{{ block.text }}</p>
+
+  {% if block.author %}
+    <span class="block-quote-author">{{ block.author }}</span>
+  {% endif %}
+
+  {% if block.description %}
+    <p class="block-description">{{ block.description }}</p>
+  {% endif %}
+</div>

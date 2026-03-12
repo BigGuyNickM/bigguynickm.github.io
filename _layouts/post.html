@@ -1,0 +1,10 @@
+---
+layout: default
+body_class: page-post
+---
+
+{% include post-hero.html %}
+
+{% for section in page.sections %}
+  {% include post-section.html section=section is_first=forloop.first %}
+{% endfor %}

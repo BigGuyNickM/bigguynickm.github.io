@@ -1,0 +1,21 @@
+{% assign b = include.block %}
+
+<div class="block block--code" id="{{ block.id }}">
+  {% if block.title %}
+    <h3 class="block-title">{{ block.title }}</h3>
+  {% endif %}
+
+  <div class="block-code-wrap">
+    {% if block.lang %}
+      <div class="block-code-header">
+        <span>{{ block.lang }}</span>
+        <button class="block-code-copy">Copy</button>
+      </div>
+    {% endif %}
+    <pre class="block-code-pre"><code class="language-{{ block.lang }}">{{ block.code | escape }}</code></pre>
+  </div>
+
+  {% if block.description %}
+    <p class="block-description">{{ block.description }}</p>
+  {% endif %}
+</div>

@@ -1,0 +1,23 @@
+{% assign section = include.section %}
+
+{% unless include.is_first %}
+  <div class="separator" style="padding: 0 var(--post-inset);"></div>
+{% endunless %}
+
+<section class="post-section" id="{{ section.id }}">
+
+  
+
+  <div class="post-section-header">
+    {% include section-heading.html label=section.label title=section.title accent=section.accent %}
+  </div>
+
+  
+
+  <div class="post-section-content">
+    {% for block in section.blocks %}
+      {% include blocks/{{ block.type }}.html block=block %}
+    {% endfor %}
+  </div>
+
+</section>
