@@ -28,6 +28,8 @@ body_class: page-home
 
 <div class="hero-separator"></div>
 
+{% assign featured_posts_check = site.posts | where: "featured", true %}
+{% if featured_posts_check.size > 0 %}
 <section class="section" id="featured">
   {% include section-heading.html label="Featured" title="Project" accent="Highlights" %}
   <div class="section-content">
@@ -64,6 +66,7 @@ body_class: page-home
     </div>
   </div>
 </section>
+{% endif %}
 
 <section class="section" id="work">
   {% include section-heading.html label="All Work" title="Project" accent="Gallery" %}
