@@ -1,5 +1,6 @@
-{% assign opt_thumb = page.thumbnail | replace: '/upload/', '/upload/f_auto,q_auto,w_1920/' %}
-<div class="post-hero" style="background-image: url('{{ opt_thumb }}')"></div>
+{% assign opt_thumb = page.thumbnail | replace: '/upload/', '/upload/f_auto,q_auto,w_2560/' %}
+{% assign hero_focus = page.hero_focus | default: 50 %}
+<div class="post-hero" style="background-image: url('{{ opt_thumb }}'); background-position: center {{ hero_focus }}%;"></div>
 
 <div class="post-hero-details">
 

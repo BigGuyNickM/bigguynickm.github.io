@@ -25,6 +25,7 @@
   border-top-width: 2px;
   border-bottom-width: 2px;
   transition: border-color var(--trans-fast);
+  aspect-ratio: 4 / 5;
 }
 
 /* category color themes */
@@ -32,6 +33,7 @@
 .post-card--photography { --card-theme: var(--orange); }
 .post-card--coding      { --card-theme: var(--cyan); }
 .post-card--game        { --card-theme: var(--yellow); }
+.post-card--design      { --card-theme: var(--purple); }
 
 .post-card:hover { border-color: var(--card-theme); }
 

@@ -3,7 +3,7 @@ layout: post
 title: "Snow Globe"
 date: 2025-11-22
 category: 3d
-featured: true
+featured: false
 thumbnail: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773340183/Snowglobe_Final_Render_whercf.jpg"
 description: "A holiday-themed project for my Advanced Modeling class. I wanted to do something scene-based rather than a single prop, so I built a stylized snow globe with a snowman and presents inside, and hand-painted wooden house and tree decorations on the outside."
 

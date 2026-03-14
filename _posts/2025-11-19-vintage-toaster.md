@@ -3,7 +3,7 @@ layout: post
 title: "Vintage Toaster"
 date: 2025-11-19
 category: 3d
-featured: true
+featured: false
 thumbnail: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773342702/Vintage_Toaster_Final_Render_s4cgix.jpg"
 description: "A hard surface modeling project for my Advanced Modeling class. I had to model a household appliance, so I went with a vintage style toaster and leaned into a stylized look rather than trying to go realistic. This was my first time doing a full project entirely as a Sub-D model from start to finish."
 

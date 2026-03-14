@@ -3,9 +3,16 @@
     <h3 class="block-title">{{ block.title }}</h3>
   {% endif %}
 
-  {% assign opt_src = block.src | replace: '/upload/', '/upload/f_auto,q_auto/' %}
-  <a class="lightbox-trigger" data-src="{{ block.src }}" data-alt="{{ block.alt | default: block.title }}" aria-label="{{ block.alt | default: block.title }}">
-    <img src="{{ opt_src }}" alt="{{ block.alt | default: block.title }}" class="block-image-img">
+  {% if block.animated %}
+    {% assign opt_src = block.src %}
+    {% assign lightbox_src = block.src %}
+  {% else %}
+    {% assign opt_src = block.src | replace: '/upload/', '/upload/f_auto,q_auto/' %}
+    {% assign lightbox_src = block.src | replace: '/upload/', '/upload/f_auto,q_auto,w_2400/' %}
+  {% endif %}
+
+  <a class="lightbox-trigger" data-src="{{ lightbox_src }}" data-alt="{{ block.alt | default: block.title }}" aria-label="{{ block.alt | default: block.title }}">
+    <img src="{{ opt_src }}" alt="{{ block.alt | default: block.title }}" class="block-image-img" loading="lazy">
   </a>
 
   {% if block.description %}

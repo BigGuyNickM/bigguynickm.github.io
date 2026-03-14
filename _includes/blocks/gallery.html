@@ -18,12 +18,18 @@
 
   <div class="block-gallery-grid block-gallery-grid--{{ cols }}">
     {% for image in block.images %}
-      {% assign opt_src = image.src | replace: '/upload/', '/upload/f_auto,q_auto/' %}
+      {% if image.animated %}
+        {% assign opt_src = image.src %}
+        {% assign lightbox_src = image.src %}
+      {% else %}
+        {% assign opt_src = image.src | replace: '/upload/', '/upload/f_auto,q_auto/' %}
+        {% assign lightbox_src = image.src | replace: '/upload/', '/upload/f_auto,q_auto,w_2400/' %}
+      {% endif %}
       <a class="lightbox-trigger block-gallery-item"
-         data-src="{{ image.src }}"
+         data-src="{{ lightbox_src }}"
          data-alt="{{ image.alt }}"
          aria-label="{{ image.alt }}">
-        <img src="{{ opt_src }}" alt="{{ image.alt }}" class="block-gallery-img">
+        <img src="{{ opt_src }}" alt="{{ image.alt }}" class="block-gallery-img" loading="lazy">
       </a>
     {% endfor %}
   </div>

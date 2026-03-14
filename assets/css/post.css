@@ -3,7 +3,6 @@
   height: 100vh;
   min-height: 400px;
   background-size: cover;
-  background-position: center;
   margin-bottom: -180px;
 }
 .post-hero::after {
@@ -35,6 +34,7 @@
 .post-hero-tag--photography { color: var(--orange); }
 .post-hero-tag--coding      { color: var(--cyan); }
 .post-hero-tag--game        { color: var(--yellow); }
+.post-hero-tag--design      { color: var(--purple); }
 
 .post-hero-title { font-family: var(--font-main); font-size: var(--sz-hero); font-weight: normal; line-height: 1; }
 

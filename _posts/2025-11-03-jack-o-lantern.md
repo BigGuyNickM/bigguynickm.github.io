@@ -3,7 +3,7 @@ layout: post
 title: "Jack O' Lantern"
 date: 2025-11-03
 category: 3d
-featured: true
+featured: false
 thumbnail: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773341277/JackOLantern_Final_Render_zvy0v7.jpg"
 description: "A jack o' lantern project for my Advanced Modeling class. I went with a cat o' lantern since I love cats (who doesn't?). Sculpted the base in Blender, retopologized it, then baked and textured in Substance Painter."
 
