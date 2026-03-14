@@ -2,7 +2,7 @@
 layout: post
 title: "Treeline Menace"
 date: 2023-12-05
-category: 3d
+category: design
 featured: false
 hero_focus: 30
 thumbnail: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773438930/Treeline_Menace1_Poster_zghs8e.webp"
