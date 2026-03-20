@@ -30,11 +30,11 @@
   letter-spacing: var(--ls-wide);
   text-transform: uppercase;
 }
-.post-hero-tag--3d          { color: var(--purple); }
+.post-hero-tag--3d,
+.post-hero-tag--design      { color: var(--purple); }
 .post-hero-tag--photography { color: var(--orange); }
 .post-hero-tag--coding      { color: var(--cyan); }
 .post-hero-tag--game        { color: var(--yellow); }
-.post-hero-tag--design      { color: var(--purple); }
 
 .post-hero-title { font-family: var(--font-main); font-size: var(--sz-hero); font-weight: normal; line-height: 1; }
 

@@ -62,7 +62,7 @@
 .block--code .block-title { color: var(--cyan); }
 
 .block-code-wrap {
-  background: #00222b;
+  background: var(--code-bg);
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--highlight);
@@ -73,7 +73,7 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 16px;
-  background: #001a22;
+  background: var(--code-header-bg);
   border-bottom: 1px solid var(--highlight);
   font-family: var(--font-accent);
   font-size: var(--sz-ui-md);
@@ -96,7 +96,7 @@
   font-size: var(--sz-ui-md);
   color: var(--text-dim);
   line-height: 2;
-  background: #00222b !important;
+  background: var(--code-bg) !important;
 }
 
 /* callouts */
@@ -133,10 +133,10 @@
 .lightbox-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(13, 11, 9, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--bg-95);
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--trans-mid);

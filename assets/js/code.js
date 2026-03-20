@@ -1,20 +1,29 @@
-const COPY_RESET_MS = 2000;
+(function () {
+  const COPY_RESET_MS = 2000;
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.block-code-copy');
-    if (!btn) return;
+  const resetCopyButton = (button) => {
+    button.textContent = 'Copy';
+    button.classList.remove('copied');
+  };
 
-    const pre = btn.closest('.block-code-wrap').querySelector('.block-code-pre');
+  const handleCopySuccess = (button) => {
+    button.textContent = 'Copied!';
+    button.classList.add('copied');
+    setTimeout(() => resetCopyButton(button), COPY_RESET_MS);
+  };
+
+  const handleDocumentClick = (event) => {
+    const button = event.target.closest('.block-code-copy');
+    const pre = button
+      ?.closest('.block-code-wrap')
+      ?.querySelector('.block-code-pre');
     if (!pre) return;
 
-    navigator.clipboard.writeText(pre.textContent.trim()).then(() => {
-      btn.textContent = 'Copied!';
-      btn.classList.add('copied');
-      setTimeout(() => {
-        btn.textContent = 'Copy';
-        btn.classList.remove('copied');
-      }, COPY_RESET_MS);
-    });
+    const text = pre.textContent.trim();
+    navigator.clipboard.writeText(text).then(() => handleCopySuccess(button));
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('click', handleDocumentClick);
   });
-});
+})();

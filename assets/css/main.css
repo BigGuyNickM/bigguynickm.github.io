@@ -8,6 +8,18 @@
   --cyan:       #4EC9C0;
   --orange:     #AE3E23;
   --highlight:  rgba(255, 230, 160, 0.07);
+  /* Opacity variants for overlays/glows */
+  --bg-60:      rgba(13, 11, 9, 0.6);
+  --bg-70:      rgba(13, 11, 9, 0.7);
+  --bg-85:      rgba(13, 11, 9, 0.85);
+  --bg-95:      rgba(13, 11, 9, 0.95);
+  --yellow-08:  rgba(240, 192, 64, 0.08);
+  --yellow-15:  rgba(240, 192, 64, 0.15);
+  --yellow-20:  rgba(240, 192, 64, 0.2);
+  --yellow-30:  rgba(240, 192, 64, 0.3);
+  --purple-10:  rgba(155, 126, 200, 0.1);
+  --code-bg:    #00222b;
+  --code-header-bg: #001a22;
 
   --font-main:   Georgia, 'Times New Roman', serif;
   --font-accent: 'Trebuchet MS', 'Lucida Grande', sans-serif;
@@ -31,7 +43,6 @@
 
   --gap-xs: 10px;
   --gap-sm: 15px;
-  --gap-ms: 15px;
   --gap-md: 20px;
   --gap-ml: 25px;
   --gap-lg: 30px;

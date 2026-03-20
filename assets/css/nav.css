@@ -11,7 +11,7 @@
   transition: background var(--trans-mid), backdrop-filter var(--trans-mid);
 }
 .site-nav.scrolled {
-  background: rgba(13, 11, 9, 0.85);
+  background: var(--bg-85);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--highlight);
 }
@@ -55,22 +55,26 @@
 
 /* footer lives here since it's the other piece of site chrome */
 .site-footer {
-  padding: var(--gap-lg) var(--section-pad-s);
-  text-align: center;
-  font-weight: bold;
-  font-size: var(--sz-ui-sm);
-  color: var(--text-muted);
-  border-top: 1px solid var(--highlight);
-  letter-spacing: var(--ls-mid);
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: var(--gap-xl);
+  padding: var(--gap-lg) var(--section-pad-s);
+  border-top: 1px solid var(--highlight);
+  font-size: var(--sz-ui-sm);
+  font-weight: bold;
+  letter-spacing: var(--ls-mid);
+  color: var(--text-muted);
+  text-align: center;
 }
 .site-footer .footer-accent { color: var(--purple); }
 
-.footer-socials { display: flex; gap: var(--gap-md); align-items: center; }
+.footer-socials { display: flex; align-items: center; gap: var(--gap-md); }
 
-.footer-social-link { color: var(--text-muted); transition: color var(--trans-fast); display: flex; }
+.footer-social-link {
+  display: flex;
+  color: var(--text-muted);
+  transition: color var(--trans-fast);
+}
 .footer-social-link:hover { color: var(--text); }
 .footer-social-link svg { width: 18px; height: 18px; }

@@ -5,13 +5,21 @@ permalink: /404.html
 ---
 
 <section class="hero" style="background: var(--bg); height: 100vh; display: flex; align-items: center; justify-content: center;">
-  <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: var(--gap-lg);">
+  <div style="position: relative; z-index: 1; text-align: center; display: flex; flex-direction: column; align-items: center; gap: var(--gap-lg);">
     <h1 class="hero-name" style="font-size: var(--sz-hero);">
       4<em>0</em>4
     </h1>
     <p style="color: var(--text-dim); font-family: var(--font-accent); font-size: var(--sz-ui-md); letter-spacing: var(--ls-extra); text-transform: uppercase;">
       Page not found
     </p>
-    <a href="{{ '/' | relative_url }}" class="btn">← Back Home</a>
+    <a href="{{ site.url }}{{ site.baseurl }}/" class="btn" id="404-home-link" target="_self">← Back Home</a>
   </div>
 </section>
+
+<script>
+  document.getElementById('404-home-link')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    window.location.href = this.getAttribute('href');
+  });
+</script>

@@ -1,4 +1,8 @@
-{% assign opt_thumb = include.thumbnail | replace: '/upload/', '/upload/f_auto,q_auto,w_820/' %}
+{% if include.animated %}
+  {% assign opt_thumb = include.thumbnail %}
+{% else %}
+  {% assign opt_thumb = include.thumbnail | replace: '/upload/', '/upload/f_auto,q_auto,w_820/' %}
+{% endif %}
 <a href="{{ include.url }}"
    class="post-card post-card--{{ include.category }}">
 

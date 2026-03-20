@@ -1,54 +1,66 @@
-const _clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const _clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 
-// single module-level drag state — avoids N window listeners for N compare widgets
 let _active = null;
 
-const _setPos = (root, top, div, handle, client_x) => {
-  const r   = root.getBoundingClientRect();
-  const pct = _clamp((client_x - r.left) / r.width);
-  const str = `${(pct * 100).toFixed(3)}%`;
-  top.style.clipPath = `inset(0 ${(100 - pct * 100).toFixed(3)}% 0 0)`;
-  div.style.left     = str;
-  handle.style.left  = str;
+const _setPos = (root, top_layer, divider, handle, client_x) => {
+  const rect = root.getBoundingClientRect();
+  const pct = _clamp((client_x - rect.left) / rect.width);
+  const pct_str = `${(pct * 100).toFixed(3)}%`;
+  const right_pct = `${(100 - pct * 100).toFixed(3)}%`;
+
+  top_layer.style.clipPath = `inset(0 ${right_pct} 0 0)`;
+  divider.style.left = pct_str;
+  handle.style.left = pct_str;
   return pct;
 };
 
 const _initCompare = (root) => {
-  const top    = root.querySelector('[data-compare-top]');
-  const div    = root.querySelector('[data-compare-divider]');
+  const top_layer = root.querySelector('[data-compare-top]');
+  const divider = root.querySelector('[data-compare-divider]');
   const handle = root.querySelector('[data-compare-handle]');
-  if (!top || !div || !handle) return;
+  if (!(top_layer && divider && handle)) return;
 
-  let cur_pct = 0.5;
+  let current_pct = 0.5;
+
+  const set_from_client_x = (client_x) => {
+    current_pct = _setPos(root, top_layer, divider, handle, client_x);
+  };
 
   handle.addEventListener('pointerdown', () => {
-    _active = { root, top, div, handle, get_pct: () => cur_pct };
+    _active = { root, get_pct: () => current_pct, set_from_client_x };
   });
 
-  // set initial 50/50
-  cur_pct = _setPos(root, top, div, handle, root.getBoundingClientRect().left + root.offsetWidth / 2);
+  const center_x = root.getBoundingClientRect().left + root.offsetWidth / 2;
+  set_from_client_x(center_x);
 
-  // expose for resize recalc
-  root._compare_pct = () => cur_pct;
-  root._compare_set = (cx) => { cur_pct = _setPos(root, top, div, handle, cx); };
+  root._compare_pct = () => current_pct;
+  root._compare_set = set_from_client_x;
 };
 
-// single shared pointermove/pointerup on window
-window.addEventListener('pointermove', (e) => {
+const handlePointerMove = (event) => {
   if (!_active) return;
-  _active.root._compare_set(e.clientX);
-}, { passive: true });
+  _active.set_from_client_x(event.clientX);
+};
 
-window.addEventListener('pointerup', () => { _active = null; });
+const handlePointerUp = () => {
+  _active = null;
+};
 
-// resize: nudge each widget to keep ratio
-window.addEventListener('resize', () => {
-  document.querySelectorAll('[data-compare]').forEach(root => {
-    if (!root._compare_set || !root._compare_pct) return;
-    const r = root.getBoundingClientRect();
-    root._compare_set(r.left + root._compare_pct() * r.width);
+const handleResize = () => {
+  document.querySelectorAll('[data-compare]').forEach((compare_root) => {
+    const set = compare_root._compare_set;
+    const get_pct = compare_root._compare_pct;
+    if (!set || !get_pct) return;
+    const rect = compare_root.getBoundingClientRect();
+    const center_x = rect.left + get_pct() * rect.width;
+    set(center_x);
   });
-}, { passive: true });
+};
+
+window.addEventListener('pointermove', handlePointerMove, { passive: true });
+window.addEventListener('pointerup', handlePointerUp);
+
+window.addEventListener('resize', handleResize, { passive: true });
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-compare]').forEach(_initCompare);

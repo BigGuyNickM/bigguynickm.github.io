@@ -3,35 +3,43 @@ const PAUSE_MS = 2000;
 const START_OFFSET = 3;
 const TIMING = 'cubic-bezier(0.45, 0, 0.55, 1)';
 
-let track, dots, items, card_count;
+let track;
+let dots;
+let items;
+let card_count;
 let current_index = START_OFFSET;
 let autoplay_timer;
 
 const _getStep = () => {
-  const _style = window.getComputedStyle(track);
-  return items[0].offsetWidth + parseInt(_style.gap);
+  const computed = window.getComputedStyle(track);
+  const gap = parseInt(computed.gap, 10) || 0;
+  return items[0].offsetWidth + gap;
 };
 
-const _transition = (ms, props = ['transform']) =>
-  props.map(p => `${p} ${ms}ms ${p === 'opacity' ? 'ease' : TIMING}`).join(', ');
+const _getTransition = (duration_ms, properties = ['transform']) =>
+  properties
+    .map((prop) => `${prop} ${duration_ms}ms ${prop === 'opacity' ? 'ease' : TIMING}`)
+    .join(', ');
 
 const updateUI = (animate = true) => {
-  const _step = _getStep();
-  const _ms = animate ? ANIM_MS : 0;
+  const step = _getStep();
+  const duration_ms = animate ? ANIM_MS : 0;
 
-  track.style.transition = _transition(_ms);
-  items.forEach(_item => _item.style.transition = _transition(_ms, ['transform', 'opacity']));
-
-  const _offset = current_index * _step + items[0].offsetWidth / 2;
-  track.style.transform = `translateX(calc(50% - ${_offset}px))`;
-
-  items.forEach((_item, _i) => {
-    _item.classList.toggle('active', _i === current_index);
-    _item.classList.toggle('inactive', _i !== current_index);
+  track.style.transition = _getTransition(duration_ms);
+  items.forEach((item) => {
+    item.style.transition = _getTransition(duration_ms, ['transform', 'opacity']);
   });
 
-  const _real_idx = (current_index - START_OFFSET + card_count) % card_count;
-  dots.forEach((_dot, _i) => _dot.classList.toggle('active', _i === _real_idx));
+  const offset = current_index * step + items[0].offsetWidth / 2;
+  track.style.transform = `translateX(calc(50% - ${offset}px))`;
+
+  items.forEach((item, i) => {
+    item.classList.toggle('active', i === current_index);
+    item.classList.toggle('inactive', i !== current_index);
+  });
+
+  const real_index = (current_index - START_OFFSET + card_count) % card_count;
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === real_index));
 };
 
 const jumpNext = () => {
@@ -41,8 +49,12 @@ const jumpNext = () => {
   if (current_index < START_OFFSET + card_count) return;
 
   setTimeout(() => {
+    track.classList.add('carousel-instant');
     current_index = START_OFFSET;
     updateUI(false);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => track.classList.remove('carousel-instant'));
+    });
   }, ANIM_MS);
 };
 
@@ -59,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
   items = track.querySelectorAll('.carousel-item');
   card_count = dots.length;
 
-  // single featured post — center it, no scrolling or autoplay
   if (card_count <= 1) {
     items[0].classList.add('active');
     track.style.transform = `translateX(calc(50% - ${items[0].offsetWidth / 2}px))`;
@@ -67,9 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  dots.forEach(_dot => {
-    _dot.addEventListener('click', () => {
-      current_index = START_OFFSET + parseInt(_dot.dataset.idx);
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      current_index = START_OFFSET + parseInt(dot.dataset.idx, 10);
       updateUI(true);
       resetAutoplay();
     });

@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!scroll_btn) return;
 
   scroll_btn.addEventListener('click', () => {
-    const target = document.getElementById('featured') || document.getElementById('work');
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    const target = document.getElementById('featured') ?? document.getElementById('work');
+    target ? target.scrollIntoView({ behavior: 'smooth' }) : undefined;
   });
 });

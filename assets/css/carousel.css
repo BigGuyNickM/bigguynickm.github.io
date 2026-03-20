@@ -14,7 +14,7 @@
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   width: 80%; height: 90%;
-  background: radial-gradient(ellipse at center, rgba(240, 192, 64, 0.2) 0%, transparent 75%);
+  background: radial-gradient(ellipse at center, var(--yellow-20) 0%, transparent 75%);
   filter: blur(40px);
   z-index: -1;
 }
@@ -37,7 +37,12 @@
   border: 1px solid var(--yellow);
   border-top-width: 2px;
   border-bottom-width: 2px;
-  box-shadow: 0 0 30px rgba(240, 192, 64, 0.15);
+  box-shadow: 0 0 30px var(--yellow-15);
+}
+
+/* no border/shadow transition during instant loop jump */
+.carousel-track.carousel-instant .post-card {
+  transition: none;
 }
 
 /* dot indicators */
@@ -57,4 +62,4 @@
 
 /* no mask when single card or on narrow screens */
 .carousel-wrapper.no-mask { -webkit-mask-image: none; mask-image: none; }
-@media (max-width: 600px)  { .carousel-wrapper { -webkit-mask-image: none; mask-image: none; } }
+@media (max-width: 600px) { .carousel-wrapper { -webkit-mask-image: none; mask-image: none; } }

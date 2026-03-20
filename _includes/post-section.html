@@ -5,15 +5,9 @@
 {% endunless %}
 
 <section class="post-section" id="{{ section.id }}">
-
-  
-
   <div class="post-section-header">
     {% include section-heading.html label=section.label title=section.title accent=section.accent %}
   </div>
-
-  
-
   <div class="post-section-content">
     {% for block in section.blocks %}
       {% include blocks/{{ block.type }}.html block=block %}
