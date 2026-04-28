@@ -1,1349 +1,650 @@
 ---
 layout: post
-title: "Tower Defense"
-date: 2025-05-09
+title: "Terrain Painter"
+date: 2024-11-29
 category: game
 featured: false
-thumbnail: "PLACEHOLDER/3.gif"
-description: "A semester project for my 3D Game Design class. A tower defense game with 3 enemy types and an upgrade system, coded in Odin-lang using Raylib and a custom utility package I built from scratch to fill gaps that Raylib didn't cover."
+hero_animated: true
+thumbnail: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1774046451/Terrain_Brushes_uqdylq.webp"
+description: "A 2D terrain painter I made in vanilla JavaScript for my 2D Game Design class. It auto-generates islands, and you are then able to manipulate them however you like."
 
 details:
-  Programs Used: "Odin-lang, Raylib"
+  Programs Used: "Vanilla JavaScript, HTML"
 
 toc:
-  - label: "Visual Process"
-    id: "visual-process"
-  - label: "Custom Package"
-    id: "custom-package"
-  - label: "Wait Service"
-    id: "wait-service"
-    sub: true
-  - label: "Tween Service"
-    id: "tween-service"
-    sub: true
-  - label: "Vectors"
-    id: "vectors"
-    sub: true
+  - label: "The Game"
+    id: "the-game"
   - label: "Main Script"
     id: "main-script"
-  - label: "Base Files"
-    id: "base-files"
-  - label: "Game & Player"
-    id: "game-player"
+  - label: "Parameters"
+    id: "parameters"
     sub: true
-  - label: "Initialize"
-    id: "initialize"
+  - label: "Update Loop"
+    id: "update-loop"
     sub: true
-  - label: "Update"
-    id: "update"
+  - label: "User Input"
+    id: "user-input"
     sub: true
-  - label: "Logic Files"
-    id: "logic-files"
-  - label: "Grid Logic"
-    id: "grid-logic"
+  - label: "Terrain Script"
+    id: "terrain-script"
+  - label: "Terrain Class"
+    id: "terrain-class"
     sub: true
-  - label: "Entity Logic"
-    id: "entity-logic"
+  - label: "Lighting System"
+    id: "lighting-system"
     sub: true
-  - label: "Wave Logic"
-    id: "wave-logic"
+  - label: "Colors & Drawing"
+    id: "colors-drawing"
     sub: true
-  - label: "Player Logic"
-    id: "player-logic"
-    sub: true
-  - label: "Upgrade Logic"
-    id: "upgrade-logic"
-    sub: true
-  - label: "Camera Logic"
-    id: "camera-logic"
-    sub: true
-  - label: "Projectile Logic"
-    id: "projectile-logic"
-    sub: true
-  - label: "Notification Logic"
-    id: "notif-logic"
+  - label: "Noise Generator"
+    id: "noise-generator"
+  - label: "Brush Script"
+    id: "brush-script"
+  - label: "Brush Modes"
+    id: "brush-modes"
     sub: true
   - label: "Final Note"
     id: "final-note"
 
 sections:
-  - title: "Visual"
-    accent: "Process"
-    label: "Dev Progression"
-    id: "visual-process"
+  - title: "The"
+    accent: "Game"
+    label: "Live Examples"
+    id: "the-game"
     blocks:
-      - type: warning
-        id: "old-project-warning"
-        title: "Older Project"
-        text: "This is one of my older projects. The code here reflects where I was at the time and doesn't represent how I'd approach things now. I've kept it up because I think it's still a good showcase of what I was working on."
+      - type: note
+        id: "link"
+        title: "Heres a link to the playable game"
+        text: "https://bigguynick.itch.io/terrain-painter"
 
       - type: image
-        id: "step-1"
-        title: "Step 1 — Core Systems"
-        src: "PLACEHOLDER/1.gif"
-        alt: "Core enemy and tower systems"
+        id: "example-1"
+        title: "Example 1 - Custom Islands"
+        src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1774046448/Terrain_screenshot2_rkfggw.webp"
+        alt: "Custom islands"
+
+      - type: image
+        id: "example-2"
+        title: "Example 2 - Brushes"
+        src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1774046451/Terrain_Brushes_uqdylq.webp"
+        alt: "Brush tools in action"
         animated: true
-        description: "Started by getting the core systems in place. Enemies walk toward the center and the tower automatically shoots at them."
 
       - type: image
-        id: "step-2"
-        title: "Step 2 — Waves & Gold"
-        src: "PLACEHOLDER/2.gif"
-        alt: "Wave and gold systems"
+        id: "example-3"
+        title: "Example 3 - Lighting System"
+        src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1774046450/Terrain_Lighting_eyiuse.webp"
+        alt: "Dynamic lighting and shadows on terrain"
         animated: true
-        description: "Added waves that get progressively harder and enemies now drop gold on death."
 
-      - type: image
-        id: "step-3-enemies"
-        title: "Step 3 — Enemy Assets"
-        src: "PLACEHOLDER/characters.png"
-        alt: "3 enemy models"
-        description: "Modeled the three enemy types. Went for a goofy look."
-
-      - type: image
-        id: "step-4-env"
-        title: "Step 4 — Environment Assets"
-        src: "PLACEHOLDER/environment_assets.png"
-        alt: "Environment assets"
-        description: "Modeled and added the environment assets."
-
-      - type: image
-        id: "step-5-final"
-        title: "Step 5 — All Together"
-        src: "PLACEHOLDER/3.gif"
-        alt: "Final gameplay"
-        animated: true
-        description: "Imported all the assets, added health and an upgrade system to the tower, and put together a notification system."
-
-  - title: "The Custom"
-    accent: "Package"
-    label: "Custom Utilities"
-    id: "custom-package"
-    blocks:
-      - type: text
-        id: "package-intro"
-        title: "Why a Custom Package"
-        paragraphs:
-          - "Both Odin and Raylib are pretty bare bones when it comes to things like delayed callbacks, tweening, and vector math utilities. So I built a custom package with a handful of services to fill those gaps and make development faster. The three most important ones are the wait service, tween service, and vectors."
-
-      - type: code
-        id: "wait-setup"
-        title: "Wait Service — Setup"
-        lang: odin
-        description: "The wait service lets you pass in any function with a delay before it fires, with an option to repeat. Here's the struct and how each wait gets created."
-        code: |
-          Wait :: struct {
-            time 		: f64,
-            task 		: proc(),
-            repeat 		: bool,
-            start_time 	: f64
-          }
-
-          Waits : [dynamic]Wait
-
-          wait :: proc (time : f64, task : proc(), repeat := false) {
-            new_wait := Wait{
-              time = time,
-              task = task,
-              repeat = repeat,
-              start_time = rl.GetTime()
-            }
-            append(&Waits, new_wait)
-          }
-
-      - type: code
-        id: "wait-service"
-        title: "Wait Service — Service Loop"
-        lang: odin
-        description: "wait_service() runs every frame, loops through the active waits, and fires the task when the time is up. Repeating waits reset their timer, everything else gets removed."
-        code: |
-          wait_service :: proc () {
-            len := len(Waits)
-            if len == 0 { return }
-            current_time := rl.GetTime()
-            for i := len - 1; i >= 0; i -= 1 {
-              wait := &Waits[i]
-              if wait.start_time == 0 { continue }
-              if (current_time - wait.start_time) >= wait.time {
-                wait.task() // run task
-                if wait.repeat 	{ wait.start_time = current_time } // reset time
-                else 			{ unordered_remove(&Waits, i) } // remove wait
-              }
-            }
-          }
-
-      - type: code
-        id: "tween-setup"
-        title: "Tween Service — Setup"
-        lang: odin
-        description: "The tween service smoothly interpolates any numeric value toward a target over a set duration using a custom easing function. It works generically across any numeric type using Odin's parametric polymorphism."
-        code: |
-          Tween :: struct {
-            object:     rawptr,
-            start:      rawptr,
-            target:     rawptr,
-            start_time: f64,
-            duration:   f64,
-            easing:     proc(f64) -> f64,
-            type:       typeid,
-          }
-
-          Tweens: [dynamic]Tween
-
-          tween :: proc(object: ^$T, target: T, duration: f64, easing: proc(f64) -> f64)
-          where intrinsics.type_is_numeric(T) {
-            start_copy := new(T)
-            start_copy^ = object^
-            target_copy := new(T)
-            target_copy^ = target
-            append(&Tweens, Tween{
-              object     = object,
-              start      = start_copy,
-              target     = target_copy,
-              start_time = rl.GetTime(),
-              duration   = duration,
-              easing     = easing,
-              type       = typeid_of(T),
-            })
-          }
-
-      - type: code
-        id: "tween-service"
-        title: "Tween Service — Service Loop"
-        lang: odin
-        description: "tween_service() steps each active tween forward every frame. It uses a type switch to cast the raw pointer to the right type and apply the interpolation, then frees and removes it once it's done."
-        code: |
-          run_tween :: proc(start, end: $T, time: f64) -> T {
-            return start + (end - start) * T(time)
-          }
-
-          tween_service :: proc() {
-            if len(Tweens) == 0 do return
-            current_time := rl.GetTime()
-            for i := len(Tweens) - 1; i >= 0; i -= 1 {
-              t := &Tweens[i]
-              elapsed := current_time - t.start_time
-              time := math.min(elapsed / t.duration, 1)
-              progress := clamp(elapsed / t.duration, 0, 1)
-              eased := t.easing(progress)
-              // Skip if invalid or finished
-              if t.object == nil || t.target == nil || time == 1 {
-                free(t.start)
-                free(t.target)
-                unordered_remove(&Tweens, i)
-                continue
-              }
-              switch T := t.type; T {
-              case typeid_of(int):  _apply_tween(int,  t.object, t.start, t.target, eased)
-              case typeid_of(f32):  _apply_tween(f32,  t.object, t.start, t.target, eased)
-              case typeid_of(Vec2): _apply_tween(Vec2, t.object, t.start, t.target, eased)
-              case typeid_of(Vec3): _apply_tween(Vec3, t.object, t.start, t.target, eased)
-              case typeid_of(Vec4): _apply_tween(Vec4, t.object, t.start, t.target, eased)
-              }
-              // Helper function to cast type to the tweens
-              _apply_tween :: proc($T: typeid, object, start, target: rawptr, eased: f64) {
-                (cast(^T)object)^ = run_tween((cast(^T)start)^, (cast(^T)target)^, eased)
-              }
-            }
-          }
-
-      - type: code
-        id: "vector-types"
-        title: "Vectors — Types"
-        lang: odin
-        description: "Odin and Raylib are both light on vector functionality so I defined my own types with destructuring helpers for both float and integer variants."
-        code: |
-          Vec2 :: [2]f32
-          Vec3 :: [3]f32
-          Vec4 :: [4]f32
-
-          desVec2 :: proc (vec : ^Vec2) -> (f32, f32) { return vec.x, vec.y }
-          desVec3 :: proc (vec : ^Vec3) -> (f32, f32, f32) { return vec.x, vec.y, vec.z }
-          desVec4 :: proc (vec : ^Vec4) -> (f32, f32, f32, f32) { return vec.x, vec.y, vec.z, vec.w }
-
-          // i32 vectors for pixel/grid based operations
-          Vec2i :: [2]i32
-          Vec3i :: [3]i32
-          Vec4i :: [4]i32
-
-          desVec2i :: proc (vec : ^Vec2i) -> (i32, i32) { return vec.x, vec.y }
-          desVec3i :: proc (vec : ^Vec3i) -> (i32, i32, i32) { return vec.x, vec.y, vec.z }
-          desVec4i :: proc (vec : ^Vec4i) -> (i32, i32, i32, i32) { return vec.x, vec.y, vec.z, vec.w }
-
-      - type: code
-        id: "vector-math"
-        title: "Vectors — Math Functions"
-        lang: odin
-        description: "Direction, angle, and distance calculations that work generically across all the vector types."
-        code: |
-          direction_between :: proc(a, b: $T/[$N]$E) -> T where N > 0 {
-            dir := b - a
-            len_sq := math.sqrt(_sum_squares(dir))
-            if len_sq <= 0 {
-              return {}  // Zero vector if points are identical
-            }
-            return dir / len_sq  // Normalized direction
-
-            _sum_squares :: proc(v: $T/[$N]$E) -> E {
-              sum: E
-              for x in v { sum += x * x }
-              return sum
-            }
-          }
-
-          angle_between :: proc(a, b: $T/[$N]$E) -> f32 {
-            dx := f32(b.x) - f32(a.x)
-            dy := f32(b.y) - f32(a.y)
-            return math.atan2(dy, dx)
-          }
-
-          distance_between :: proc(a, b: $T) -> f32 {
-            when intrinsics.type_is_array(T) {  // Handle vectors (Vec2, Vec3, etc.)
-              sum: f32 = 0
-              for x, i in a {
-                diff := f32(b[i]) - f32(x)
-                sum += diff * diff
-              }
-              return math.sqrt(sum)
-            } else when intrinsics.type_is_numeric(T) {  // Handle numbers (int, f32, etc.)
-              return math.abs(f32(b) - f32(a))
-            } else {
-              #panic("Unsupported type for distance calculation")
-            }
-          }
-
-      - type: code
-        id: "vector-more"
-        title: "Vectors — Length, Dot, Normalize"
-        lang: odin
-        description: "Length, dot product, and normalization, all written generically to work across the custom vector types."
-        code: |
-          // Returns length/magnitude of vector
-          length :: proc(v: $T) -> f32 {
-            when intrinsics.type_is_array(T) {
-              sum: f32 = 0
-              for x in v {
-                sum += x * x
-              }
-              return math.sqrt(sum)
-            } else when intrinsics.type_is_numeric(T) {
-              return math.abs(f32(v))
-            } else {
-              #panic("Unsupported type for length calculation")
-            }
-          }
-
-          // Dot product between two vectors/numbers
-          dot :: proc(a, b: $T) -> f32 {
-            when intrinsics.type_is_array(T) {
-              sum: f32 = 0
-              for x, i in a {
-                sum += f32(x) * f32(b[i])
-              }
-              return sum
-            } else when intrinsics.type_is_numeric(T) {
-              return f32(a) * f32(b)
-            } else {
-              #panic("Unsupported type for dot product")
-            }
-          }
-
-          // Normalizes a vector (unit length)
-          normalize :: proc(v: $T) -> T {
-            when intrinsics.type_is_array(T) {
-              len := length(v)
-              if len > 0 {
-                result: T
-                for x, i in v {
-                  result[i] = x / len
-                }
-                return result
-              }
-              return v
-            } else when intrinsics.type_is_numeric(T) {
-              return T(1)
-            } else {
-              #panic("Unsupported type for normalization")
-            }
-          }
-
-  - title: "The Main"
+  - title: "Main"
     accent: "Script"
     label: "Entry Point"
     id: "main-script"
     blocks:
       - type: code
-        id: "main"
-        title: "main()"
-        lang: odin
-        description: "The entry point of the program. Sets up the window and runs the main loop, calling update and draw every frame."
+        id: "parameters"
+        title: "Parameters"
+        lang: javascript
+        description: "These parameters set up everything to do with the game. This is pretty sloppy, and I'd never place all of these parameters together, let alone in the main script nowadays."
         code: |
-          main :: proc () {
-            player 		:= &base.player
-            gameData 	:= &base.game
-            state 		:= &base.state
-            camera 		:= &base.camera
-            settings 	:= &base.settings
+          const tileSize = 4;
+          const mapSize = 180;
+          const zoomFactor = 0.03;
+          const detail = 0.05;
 
-            game.initialize(state, settings, gameData, camera, player)
+          const newTerrain = new Terrain(mapSize, mapSize);
+          const brush = new Brush();
 
-            rl.SetConfigFlags({
-              //.VSYNC_HINT,
-              .WINDOW_RESIZABLE,
-              .FULLSCREEN_MODE,
-            })8
-            rl.TraceLogLevel(.NONE)
-            rl.InitWindow(settings.Screen_Width, settings.Screen_Height, "Tower Defense")
-            rl.SetTargetFPS(settings.Target_FPS)
+          canvas.width = tileSize * mapSize;
+          canvas.height = tileSize * mapSize;
+          overlay.width = tileSize * mapSize;
+          overlay.height = tileSize * mapSize;
 
-            //t.initialize_world(&world, &shaders) // has to happen after window is initialized
+          let sun = 0.75*pi
+          let mouse = { x: 0, y: 0, down: false, radius: 10};
+          var keys = [];
 
-            for !rl.WindowShouldClose() // main loop
-            {
-              if !gameData.Over do game.update(state, settings, gameData, player, camera)
+          /*=== Game Animator ===*/
+          let frameCount = 0;
+          let fps = 60, fpsInterval, now, then, elapsed, startTime;
 
-              settings.Screen_Height = rl.GetScreenHeight()
-              settings.Screen_Width = rl.GetScreenWidth()
-
-              rl.BeginDrawing()
-              {
-                rl.ClearBackground(rl.SKYBLUE)
-                rl.BeginMode3D(player.Camera)
-                game.draw_scene(gameData)
-                rl.EndMode3D()
-                rl.DrawFPS(10, 10)
-                game.draw_UI(settings, gameData, player)
-              }
-              rl.EndDrawing()
-            }
-
-            rl.CloseWindow()
-            game.unload_assets(&gameData.Grid)
+          function initialize() {
+            fpsInterval = 1000 / fps;
+            then = window.performance.now();
+            startTime = then;
+            animate();
           }
 
-  - title: "The Base"
-    accent: "Files"
-    label: "Base Setup"
-    id: "base-files"
+      - type: code
+        id: "update-loop"
+        title: "Update Loop"
+        lang: javascript
+        description: "The update loop of the game. It manually calculates the FPS and displays it."
+        code: |
+          function animate(newTime) {
+            requestAnimationFrame(animate)
+            now = newTime
+            elapsed = now - then
+
+            if (elapsed > fpsInterval) {
+              then = now - (elapsed % fpsInterval)
+              let sinceStart = now - startTime;
+              let currentFps = Math.round(1000 / (sinceStart / frameCount) * 100) / 100
+
+              document.getElementById('fps').innerHTML = currentFps;
+              frameCount++
+
+              o.clearRect(0, 0, canvas.width, canvas.height)
+              brush.outlineRender();
+              brush.use();
+            }
+          }
+
+      - type: code
+        id: "user-input"
+        title: "User Input"
+        lang: javascript
+        description: "Pretty straightforward user input, simply updating parameters for various parts of the code depending on what the user does. I do find it interesting that I used a regex rather than parsing the input, but it works."
+        code: |
+          addEventListener('mousemove', (event) => {
+            mouse.x = event.clientX;
+            mouse.y = event.clientY + 10;
+            brush.x = round((event.clientX - ((window.innerWidth/2) - (canvas.width/2)))/tileSize);
+            brush.y = round((event.clientY - ((window.innerHeight/2) - (canvas.height/2)))/tileSize) + 10;
+          });
+
+          addEventListener('mousedown', (event) => { mouse.down = true; });
+          addEventListener('mouseup', (event) => { mouse.down = false; });
+
+          addEventListener('wheel', (event) => {
+            if (event.deltaY < 0 && brush.radius < 20) {
+              brush.radius++;
+            } else if (brush.radius > 0) {
+              brush.radius--;
+            }
+          });
+
+          addEventListener("keydown", (e) => {
+            let key = e.key.toLowerCase()
+            keys[key] = true
+            const regex = /^[1-4]$/;
+            if(regex.test(key)){
+              let ele = document.getElementById(`${brush.mode}`);
+              ele.style.color = 'white';
+              ele.style.fontSize = '20px';
+              switch (key) {
+                case '1': brush.mode = 'erode'; break;
+                case '2': brush.mode = 'build'; break;
+                case '3': brush.mode = 'smooth'; break;
+                case '4': brush.mode = 'flatten'; break;
+              }
+              ele = document.getElementById(`${brush.mode}`);
+              ele.style.color = 'yellow';
+              ele.style.fontSize = '25px';
+            }
+          });
+
+  - title: "Terrain"
+    accent: "Script"
+    label: "Terrain System"
+    id: "terrain-script"
     blocks:
       - type: code
-        id: "game-player"
-        title: "Game & Player Structs"
-        lang: odin
-        description: "The Game struct holds all the runtime state — entities, projectiles, waves, notifications. The Player struct holds all the combat stats and upgrade levels."
+        id: "terrain-type"
+        title: "TerrainType"
+        lang: javascript
+        description: "Holds the data for different types of terrain, such as water, sand, and grass."
         code: |
-          Game :: struct {
-            Round 				: int,
-            Over 				: bool,
-            Entities 			: map[int]Entity,
-            Projectiles 		: [dynamic]Projectile,
-            Scenery 			: [300]mc.Vec3,
-            Grid 				: Grid,
-            Wave 				: Wave,
-            Notifications 		: [dynamic]Notification,
+          class TerrainType {
+            constructor(minHeight, maxHeight, minColor, maxColor, lerpAdjustment) {
+              this.minHeight = minHeight;
+              this.maxHeight = maxHeight;
+              this.minColor = minColor;
+              this.maxColor = maxColor;
+              this.lerpAdjustment = lerpAdjustment;
+            }
           }
-
-          Projectile :: struct {
-            Position 	: mc.Vec3,
-            Velocity 	: mc.Vec3,
-          }
-
-          Notification :: struct {
-            Position 	: mc.Vec2i,
-            Text 		: cstring,
-            Size 		: i32,
-            Color 		: rl.Color,
-            Life		: f64,
-          }
-
-          game : Game
-
-          atlas 		: rl.Texture2D
-          gold_img 	: rl.Texture2D
-
-          music_sound 		: rl.Music
-          error_sound 		: rl.Sound
-          gold_sound 			: rl.Sound
-          upgrade_sound 		: rl.Sound
-          explosion_sound 	: rl.Sound
-          game_over_sound 	: rl.Sound
-          damage_sound 		: rl.Sound
-          shoot_sound 		: rl.Sound
-
-          tower_mesh 	: rl.Model
-          tree_mesh 	: rl.Model
-
-          Player :: struct {
-            Camera 		: rl.Camera3D,
-            Max_Health 	: int,
-            Health		: int,
-            Regen		: int,
-            Gold 		: int,
-            CoolDown	: bool,
-            Atk_Speed	: f32,
-            Proj_Speed 	: f32,
-            Damage		: int,
-            Target 		: ^Entity,
-            Upgrades 	: Upgrades,
-            Accumulator : f32,
-          }
-
-          Upgrades :: struct {
-            CoolDown 	: bool,
-            DMGLVL 		: int,
-            HPLVL 		: int,
-            SPDLVL 		: int,
-            RegenLVL	: int,
-            DMG_Cost 	: int,
-            HP_Cost 	: int,
-            SPD_Cost 	: int,
-            Regen_Cost 	: int,
-          }
-
-          player : Player
 
       - type: code
-        id: "wave-entity-structs"
-        title: "Wave & Entity Structs"
-        lang: odin
-        description: "The Wave struct tracks the current wave state and the pool of entities waiting to spawn. The Entity struct covers everything about an enemy — position, velocity, stats, type. Entity_Stats defines the base values for each of the three enemy types."
+        id: "terrain-class"
+        title: "Terrain - Constructor & Initialize"
+        lang: javascript
+        description: "The constructor for the terrain, which sets up all of its parameters. I also set up a draw buffer, which was fun to learn for optimization. initialize() generates the noise map, sets up all the terrain types, computes the initial shadows, and does the first full draw pass."
         code: |
-          Wave :: struct {
-            Number 		: int,
-            Started 	: bool,
-            Max 		: int,
-            Dead 		: int,
-            Alive		: int,
-            Entities	: [dynamic]Entity,
-            Spawnrate 	: f32,
-            Accumulator : f32,
-            Display 	: cstring,
-            Timer 		: int,
-          }
-
-          Wave_Setup :: struct {
-            Greg 		: int,
-            Jeffery 	: int,
-            Glurb 		: int
-          }
-
-          wave_setups : [7]Wave_Setup
-
-          Entity :: struct {
-            ID: 		int,
-            Position: 	mc.Vec3,
-            Velocity:	mc.Vec3,
-            Angle: 		f32,
-            Size:  		mc.Vec3,
-            Flip: 		bool,
-            Speed:		f32,
-            Health:		int,
-            Damage:		int,
-            Cooldown:	bool,
-            Gold: 		int,
-            Type: 		Entity_Types,
-          }
-
-          Entity_Types :: enum {
-            Greg,
-            Jeffery,
-            Glurb,
-          }
-
-          Entity_Stats : [Entity_Types]^Entity = {
-            .Greg = &Entity {
-              Speed 	= 2,
-              Health 	= 3,
-              Damage 	= 2,
-            },
-            .Jeffery = &Entity {
-              Speed 	= 4,
-              Health 	= 1,
-              Damage 	= 2,
-            },
-            .Glurb = &Entity {
-              Speed 	= 1,
-              Health 	= 5,
-              Damage 	= 5,
-            },
-          }
-
-          Entity_Shader : rl.Shader
-
-          greg_mesh 		: rl.Model
-          jeffery_mesh 	: rl.Model
-          glurb_mesh 		: rl.Model
-
-      - type: code
-        id: "initialize-1"
-        title: "initialize() — State, Settings & Camera"
-        lang: odin
-        description: "The first part of initialize() sets up game state, window settings, and the isometric camera with its orbit parameters."
-        code: |
-          initialize :: proc (state : ^base.State, settings : ^base.Settings, game : ^base.Game, camera : ^base.Camera, player : ^base.Player) {
-            {// initialize state
-              state.Game_Time 	= 0
-              state.Tick_Rate 	= 10
-              state.Tick 			= 0
-            }
-            {// initialize settings
-              settings.FOV 			= 60
-              settings.Min_FOV 		= 30
-              settings.Max_FOV 		= 90
-              settings.Sensitivity 	= 0.4
-              settings.Screen_Width	= 1280//rl.GetScreenWidth()//1280
-              settings.Screen_Height	= 720//rl.GetScreenHeight()//720
-              settings.Target_FPS		= 120
-            }
-            {// initialize camera
-              camera.Zoom 				= 20
-              camera.Yaw 					= -45.0 * mc.RAD
-              camera.Pitch 				= 45.0 * mc.RAD
-              camera.Position 			= {(camera.Zoom / 2) * math.sin(camera.Yaw) * math.cos(camera.Pitch), camera.Zoom * math.sin(camera.Pitch), (camera.Zoom / 2) * math.cos(camera.Yaw) * math.cos(camera.Pitch)}
-              camera.Forward 				= rl.Vector3Normalize({math.sin(camera.Yaw) * math.cos(camera.Pitch), math.sin(camera.Pitch), math.cos(camera.Yaw) * math.cos(camera.Pitch)})
-              camera.Right 				= {-math.cos(camera.Yaw), 0, math.sin(camera.Yaw)}
-              camera.Up 					= rl.Vector3CrossProduct(camera.Right, camera.Forward)
-              camera.Min_Zoom 			= 5
-              camera.Max_Zoom 			= 100
-              camera.Max_Zoom_Speed 		= 1
-              camera.Min_Zoom_Speed 		= 0.1
+          class Terrain {
+            constructor(width, height) {
+              this.width = width;
+              this.height = height;
+              this.grid = [];
+              this.drawBuffer = [];
+              this.shadowSet = new Set();
+              this.ridgeSet = new Map();
+              this.waterTerrain;
+              this.sandTerrain;
+              this.grassTerrain;
+              this.mountainsTerrain;
             }
 
-      - type: code
-        id: "initialize-2"
-        title: "initialize() — Game, Grid & Player"
-        lang: odin
-        description: "The second part initializes the game, creates the spatial grid, and sets all the player's starting stats and upgrade costs."
-        code: |
-            // initialize game
-            game.Over = false
-            {// initialize grid
-              game.Round = 1
-              game.Grid = logic.create_grid()
-            }
-            {// initialize player
-              player.Camera = {
-                camera.Position,
-                0,
-                { 0, 1, 0 },
-                settings.FOV,
-                .PERSPECTIVE
-              }
-              player.Gold 		= 0
-              player.Max_Health   = 10
-              player.Health 		= 10
-              player.Regen 		= 1
-              player.Damage 		= 1
-              player.Atk_Speed 	= 0.5
-              player.Proj_Speed 	= 10
-              player.CoolDown 	= false
-              player.Accumulator 	= 0
-              player.Upgrades.CoolDown   = false
-              player.Upgrades.DMGLVL 		= 0
-              player.Upgrades.HPLVL 		= 0
-              player.Upgrades.RegenLVL 	= 0
-              player.Upgrades.SPDLVL 		= 0
-              player.Upgrades.DMG_Cost 	= 5
-              player.Upgrades.HP_Cost  	= 5
-              player.Upgrades.Regen_Cost 	= 5
-              player.Upgrades.SPD_Cost 	= 5
-            }
-
-      - type: code
-        id: "initialize-3"
-        title: "initialize() — Waves"
-        lang: odin
-        description: "The third part sets up the wave system and defines the enemy composition for all 7 waves."
-        code: |
-            {// initialize waves
-              game.Wave.Number = -1
-              game.Wave.Started = false
-              game.Wave.Alive = 0
-              game.Wave.Dead = 0
-              game.Wave.Spawnrate = 1
-              game.Wave.Accumulator = 0
-              game.Wave.Timer = 0
-
-              waves := &base.wave_setups
-
-              // wave 0
-              waves[0].Greg = 18
-              waves[0].Jeffery = 2
-              waves[0].Glurb = 0
-              // wave 1
-              waves[1].Greg = 20
-              waves[1].Jeffery = 7
-              waves[1].Glurb = 3
-              // wave 2
-              waves[2].Greg = 20
-              waves[2].Jeffery = 15
-              waves[2].Glurb = 5
-              // wave 3
-              waves[3].Greg = 22
-              waves[3].Jeffery = 20
-              waves[3].Glurb = 8
-              // wave 4
-              waves[4].Greg = 25
-              waves[4].Jeffery = 15
-              waves[4].Glurb = 10
-              // wave 5
-              waves[5].Greg = 0
-              waves[5].Jeffery = 60
-              waves[5].Glurb = 0
-              // wave 6
-              waves[6].Greg = 10
-              waves[6].Jeffery = 20
-              waves[6].Glurb = 40
-            }
-
-      - type: code
-        id: "initialize-assets"
-        title: "initialize_assets()"
-        lang: odin
-        description: "Loads all models and audio. Tree placement uses the golden angle to distribute trees evenly in a ring around the map with some random offset per tree."
-        code: |
-          initialize_assets :: proc () {
-            {// initialize meshes
-              base.atlas = rl.LoadTexture("./Assets/Atlas.png")
-              base.gold_img = rl.LoadTexture("./Assets/Money.png")
-              {// environment
-                base.tower_mesh = rl.LoadModel("./Assets/Tower.glb")
-                base.tree_mesh = rl.LoadModel("./Assets/Tree.glb")
-                scene := &base.game.Scenery
-                // tree positions
-                min_radius : f32 = 30
-                max_radius : f32 = 50
-                golden_angle :: 2.39996
-                count := len(scene)
-                for i in 0..<count {
-                  t := f32(i) / f32(count)
-                  distance := min_radius + t * (max_radius - min_radius)
-                  angle := f32(i) * golden_angle
-                  scene[i] = mc.Vec3{
-                    distance * math.cos(angle),
-                    0,
-                    distance * math.sin(angle),
-                  }
-                  // random offset
-                  distance2 := rand.float32_range(-2, 2)
-                  angle2 := rand.float32_range(0, 360)
-                  candidate := scene[i] + mc.Vec3{
-                    distance2 * math.cos(angle2),
-                    0,
-                    distance2 * math.sin(angle2),
-                  }
-                  if mc.distance_between(candidate, 0) <= 40 {
-                    scene[i] = candidate
-                  } else do continue
+            initialize() {
+              const noiseMap = new PerlinNoise(this.width, this.height);
+              noiseMap.generateNoise();
+              for (let x = 0; x < this.width; x++) {
+                this.grid[x] = []
+                for (let y = 0; y < this.height; y++) {
+                  this.grid[x][y] = {x: x, y: x, val: noiseMap.grid[x][y], color: '', sColor: '', isShadow: false, angle: 0}
                 }
               }
-              {// creatures
-                base.greg_mesh = rl.LoadModel("./Assets/Greg.glb")
-                base.jeffery_mesh = rl.LoadModel("./Assets/Jeffery.glb")
-                base.glurb_mesh = rl.LoadModel("./Assets/Glurb.glb")
+              this.waterTerrain     = new TerrainType(0.3,  0.5,  'rgb(30, 176, 251)',  'rgb(40, 255, 255)');
+              this.sandTerrain      = new TerrainType(0.5,  0.53, 'rgb(215, 192, 158)', 'rgb(255, 246, 193)');
+              this.grassTerrain     = new TerrainType(0.53, 0.63, 'rgb(2, 166, 155)',   'rgb(118, 239, 124)');
+              this.mountainsTerrain = new TerrainType(0.63, 0.75, 'rgb(132, 145, 132)', 'rgb(255, 255, 255)');
+
+              this.updateShadows(0, 0, this.width, this.height);
+              for (let x = 0; x < this.width; x++) {
+                for (let y = 0; y < this.height; y++) {
+                  this.setColor(x, y);
+                  this.pushDrawBuffer(x, y);
+                }
               }
+              this.draw();
             }
-            {// initialize audio
-              rl.InitAudioDevice()
-              base.music_sound = rl.LoadMusicStream("./Assets/Music.mp3")
-              base.music_sound.looping = true
-              rl.SetMusicVolume(base.music_sound, 0.4)
-              rl.PlayMusicStream(base.music_sound)
-              base.error_sound = rl.LoadSound("./Assets/Error.mp3")
-              rl.SetSoundVolume(base.error_sound, 0.5)
-              base.explosion_sound = rl.LoadSound("./Assets/Explosion.mp3")
-              rl.SetSoundVolume(base.explosion_sound, 0.5)
-              base.upgrade_sound = rl.LoadSound("./Assets/Upgrade.mp3")
-              rl.SetSoundVolume(base.upgrade_sound, 0.5)
-              base.gold_sound = rl.LoadSound("./Assets/Gold.mp3")
-              rl.SetSoundVolume(base.gold_sound, 0.3)
-              base.game_over_sound = rl.LoadSound("./Assets/GameOver.mp3")
-              rl.SetSoundVolume(base.game_over_sound, 0.5)
-              base.damage_sound = rl.LoadSound("./Assets/Damage.mp3")
-              rl.SetSoundVolume(base.damage_sound, 0.3)
-              base.shoot_sound = rl.LoadSound("./Assets/Shoot.mp3")
-              rl.SetSoundVolume(base.shoot_sound, 0.1)
-            }
-          }
 
       - type: code
-        id: "update"
-        title: "update()"
-        lang: odin
-        description: "Called every frame. Runs the wait and tween services then dispatches all the logic functions in order."
+        id: "lighting-system"
+        title: "Lighting System"
+        lang: javascript
+        description: "These functions create the dynamic custom lighting. It detects local peaks on the terrain and draws a shadow at a distance based on the peak's height. The shadow direction is based off the sun vector, though I can switch it to point away from the mouse to act as a moveable sun. Shadows also stop once they run into another local peak, allowing for natural falloff."
         code: |
-          update :: proc (state : ^base.State, settings : ^base.Settings, game : ^base.Game, player : ^base.Player, camera : ^base.Camera ) {
-            state.DT = rl.GetFrameTime()
-            state.Game_Time = rl.GetTime()
-            state.Accumulator += state.DT
-
-            mc.wait_service()
-            mc.tween_service()
-
-            player.Camera, camera^ = logic.camera_logic(camera^, settings^)
-            logic.projectile_logic(state, game, player)
-            logic.player_logic(state, game, player)
-            logic.entity_logic(state, game, player)
-            logic.notif_logic(state, game)
-            logic.wave_logic(state, game)
-            logic.upgrade_logic(game, player)
-
-            // tick update
-            tick_interval := 1.0 / state.Tick_Rate
-            for state.Accumulator >= tick_interval {
-              state.Tick += 1
-              state.Accumulator -= tick_interval
-            }
+          updateShadows(x1, y1, x2, y2) {
+            this.detectRidge(x1, y1, x2, y2);
+            this.removeShadow(x1-10, y1-10, x2+10, y2+10);
+            this.calcShadows();
           }
 
-  - title: "The Logic"
-    accent: "Files"
-    label: "Game Logic"
-    id: "logic-files"
-    blocks:
-      - type: code
-        id: "grid-setup"
-        title: "Grid Logic — Setup & Key"
-        lang: odin
-        description: "I implemented a spatial hash map to handle collision detection more performantly than brute-force checking every entity pair. create_grid() and unload_grid() handle the lifetime of the map, and position_to_key() translates a world position into a cell key."
-        code: |
-          create_grid :: proc () -> base.Grid {
-            return base.Grid{
-              Cells = make(map[u64]base.Cell),
-              Cell_Size = 2.0 // CELL SIZE
-            }
-          }
-
-          unload_grid :: proc (grid : ^base.Grid) {
-            for _, cell in grid.Cells {
-              delete(cell.Entities)
-            }
-            delete(grid.Cells)
-          }
-
-          position_to_key :: proc (grid : ^base.Grid, pos : mc.Vec3) -> u64 {
-            x := i32(math.floor(pos.x / grid.Cell_Size))
-            z := i32(math.floor(pos.z / grid.Cell_Size))
-            return (u64(x) << 32) | u64(z)
-          }
-
-      - type: code
-        id: "grid-insert-remove"
-        title: "Grid Logic — Insert & Remove"
-        lang: odin
-        description: "Inserting and removing entities from the hash map as they move around. update_entity_grid() is just an early return if the entity hasn't moved to a new cell."
-        code: |
-          insert_entity :: proc (grid : ^base.Grid, position : mc.Vec3, entity_key : int) {
-            key := position_to_key(grid, position)
-            if _, exists := grid.Cells[key]; !exists {
-              grid.Cells[key] = base.Cell{
-                Entities = make([dynamic]int, 0, 4)
-              }
-            }
-            cell := &grid.Cells[key]
-            append(&cell.Entities, entity_key)
-          }
-
-          remove_entity :: proc (grid : ^base.Grid, entity : ^base.Entity) {
-            key := position_to_key(grid, entity.Position)
-            if cell, exists := grid.Cells[key]; exists {
-              for entity_in_cell, i in cell.Entities {
-                if entity_in_cell == entity.ID {
-                  unordered_remove(&cell.Entities, i)
-                  break
+          detectRidge(startX, startY, endX, endY) {
+            for (let x = startX; x < endX; x++) {
+              for (let y = startY; y < endY; y++) {
+                if (x < 0 || x >= this.width || y < 0 || y >= this.height) continue;
+                const dist = Math.round((this.grid[x][y].val - 0.5) * 60);
+                const ridge = this.isRidge(x, y);
+                const coordKey = `${x},${y}`;
+                if (this.ridgeSet.has(coordKey)) {
+                  if (!ridge) { this.ridgeSet.delete(coordKey); }
+                  else { this.ridgeSet.set(coordKey, dist); }
+                } else {
+                  if (ridge) { this.ridgeSet.set(coordKey, dist); }
                 }
               }
             }
-            cell := &grid.Cells[key]
-            if len(cell.Entities) == 0 {
-              delete(grid.Cells[key].Entities)
-              delete_key(&grid.Cells, key)
-            }
           }
 
-          update_entity_grid :: proc (grid : ^base.Grid, entity : ^base.Entity, pos : mc.Vec3) {
-            old_key := position_to_key(grid, entity.Position)
-            new_key := position_to_key(grid, pos)
-            // early return if still in the same cell
-            if old_key == new_key do return
-            remove_entity(grid, entity)
-            insert_entity(grid, pos, entity.ID)
+          isRidge(x, y) {
+            let invSun = invAng(sun)
+            let ftargX = round(x + cos(invSun) * 1)
+            let ftargY = round(y + sin(invSun) * 1)
+            let btargX = round(x + cos(sun) * 1)
+            let btargY = round(y + sin(sun) * 1)
+            if (ftargX >= 0 && ftargX < this.width &&
+                ftargY >= 0 && ftargY < this.height &&
+                btargX >= 0 && btargX < this.width &&
+                btargY >= 0 && btargY < this.height &&
+                this.grid[x][y].val >= this.grid[ftargX][ftargY].val &&
+                this.grid[x][y].val > this.grid[btargX][btargY].val &&
+                this.grid[x][y].val > 0.55
+            ) { return true; } else return false;
           }
 
-      - type: code
-        id: "grid-closest"
-        title: "Grid Logic — Closest Entity"
-        lang: odin
-        description: "closest_entity() queries the hash map to find the nearest enemy within a given range. The tower uses this to pick its auto-attack target."
-        code: |
-          closest_entity :: proc(game: ^base.Game, position: mc.Vec3, max_distance: f32) -> (id: int) {
-            grid := &game.Grid
-            closest_id : int = -1  // Use -1 for "not found"
-            closest_distance := max_distance
-            // Calculate initial search bounds in grid coordinates
-            min_x := i32(math.floor((position.x - max_distance) / grid.Cell_Size))
-            max_x := i32(math.floor((position.x + max_distance) / grid.Cell_Size))
-            min_z := i32(math.floor((position.z - max_distance) / grid.Cell_Size))
-            max_z := i32(math.floor((position.z + max_distance) / grid.Cell_Size))
-            // Check all cells within the max_distance bounds at once
-            for z in min_z..=max_z {
-              for x in min_x..=max_x {
-                key := position_to_key(grid, {f32(x), position.y, f32(z)})
-                if cell, ok := grid.Cells[key]; ok {
-                  for entity_id in cell.Entities {
-                    if entity, exists := game.Entities[entity_id]; exists {
-                      // Use proper 3D distance calculation
-                      offset := entity.Position - position
-                      distance := math.sqrt(offset.x*offset.x + offset.y*offset.y + offset.z*offset.z)
-                      if distance < closest_distance {
-                        closest_id = entity_id
-                        closest_distance = distance
-                        // Don't break here - we might find a closer one
-                      }
+          calcShadows() {
+            this.ridgeSet.forEach((dist, tileKey) => {
+              const [x, y] = tileKey.split(',').map(Number);
+              let theta = normAng(sun - 0.1);
+              for (let j = 0; j < 5; j++) {
+                theta = normAng(theta + 0.05);
+                for (let i = 1; i < dist; i++) {
+                  let targX = Math.round(x + Math.cos(theta) * i);
+                  let targY = Math.round(y + Math.sin(theta) * i);
+                  if (targX >= 0 && targX < this.width && targY >= 0 && targY < this.height) {
+                    if (this.grid[targX][targY].val < this.grid[x][y].val) {
+                      this.addShadow(targX, targY);
                     }
                   }
                 }
               }
-            }
-            return closest_id
+            });
           }
 
-      - type: code
-        id: "entity-logic"
-        title: "Entity Logic"
-        lang: odin
-        description: "entity_logic() iterates all active entities and calls update_entity() on each. update_entity() handles movement, the bobbing animation via size.y, dealing damage when an entity reaches the center, and awarding gold on death."
-        code: |
-          entity_logic :: proc (state : ^base.State, game : ^base.Game , player : ^base.Player) {
-            if game.Entities != nil {
-              for _, &entity in game.Entities {
-                update_entity(state, game, player, &entity)
+          addShadow(x, y) {
+            if (x >= 0 && x < this.width && y >= 0 && y < this.height) {
+              const coordKey = `${x},${y}`;
+              if (!this.shadowSet.has(coordKey)) {
+                this.shadowSet.add(coordKey);
+                this.grid[x][y].isShadow = true;
+                this.pushDrawBuffer(x, y);
               }
             }
           }
 
-          update_entity :: proc (state : ^base.State, game : ^base.Game, player : ^base.Player, entity : ^base.Entity) {
-            if entity.Health <= 0 {
-              add_gold(player, entity.Gold)
-              delete_entity(game, entity)
-              game.Wave.Alive -= 1
-              game.Wave.Dead += 1
-              return
-            }
-            if mc.distance_between(entity.Position, 0) > 2 {
-              new_position := entity.Position + entity.Velocity * state.DT
-              update_entity_grid(&game.Grid, entity, new_position)
-              entity.Position = new_position
-              if entity.Flip {
-                entity.Size.y -= (0.75 * entity.Speed) * state.DT
-                if entity.Size.y <= 0.7 do entity.Flip = !entity.Flip
-              } else {
-                entity.Size.y += (0.75 * entity.Speed) * state.DT
-                if entity.Size.y >= 1 do entity.Flip = !entity.Flip
-              }
-            } else {
-              game.Wave.Alive -= 1
-              game.Wave.Dead += 1
-              damage_player(game, player, entity.Damage)
-              delete_entity(game, entity)
-            }
-          }
-
-      - type: code
-        id: "new-entity"
-        title: "new_entity()"
-        lang: odin
-        description: "Creates a new entity of a given type at a random position on the edge of the map. Stats scale with the current wave number."
-        code: |
-          new_entity :: proc (game : ^base.Game, type : base.Entity_Types) -> base.Entity {
-            grid := &game.Grid
-            xp_mult : f32
-            switch type {
-            case .Greg: 	xp_mult = 1
-            case .Jeffery: 	xp_mult = 1.5
-            case .Glurb: 	xp_mult = 2
-            }
-            distance : f32 = 30 // distance from center
-            rand_direction := rand.float32_range(0, 360) * mc.RAD
-            position := mc.Vec3{ math.cos(rand_direction) * distance, 0, math.sin(rand_direction) * distance }
-            direction := mc.direction_between(position, 0)
-            entity := base.Entity_Stats[type]^
-            entity.Position = position
-            entity.Velocity = direction * entity.Speed
-            entity.Cooldown = false
-            entity.Type = type
-            entity.Size = 1
-            entity.Flip = false
-            angle := mc.angle_between(mc.Vec2{position.z, position.x}, 0)
-            entity.Angle = mc.normalize_degrees(angle * mc.DEG)
-            entity.Gold = max(int(f32(game.Wave.Number * 3) * xp_mult), int(xp_mult))
-            entity.Health = max(game.Wave.Number * entity.Health * 2, entity.Health)
-            entity.Damage = max(game.Wave.Number * entity.Damage, entity.Damage)
-            entity.Speed = max(f32(game.Wave.Number) * entity.Speed, entity.Speed)
-            return entity // return the key and entity
-          }
-
-      - type: code
-        id: "wave-logic"
-        title: "Wave Logic"
-        lang: odin
-        description: "wave_logic() handles spawn timing during a wave and the intermission countdown between waves. Once all enemies are dead it triggers the next wave."
-        code: |
-          wave_logic :: proc (state : ^base.State, game : ^base.Game) {
-            wave := &game.Wave
-            wave.Accumulator += state.DT
-            // spawn enemies
-            if wave.Started {
-              spawn_interval : f32 = 1.0 / wave.Spawnrate
-              for wave.Accumulator >= spawn_interval {
-                wave.Accumulator -= spawn_interval
-                spawn_entity(game)
-              }
-            } else {
-              for wave.Accumulator >= 1 {
-                wave.Accumulator -= 1
-                wave.Timer -= 1
-                if wave.Timer <= 0 {
-                  wave.Started = true
+          removeShadow(startX, startY, endX, endY) {
+            for (let x = startX; x < endX; x++) {
+              for (let y = startY; y < endY; y++) {
+                if (x < 0 || x >= this.width || y < 0 || y >= this.height) continue;
+                if (this.grid[x][y].isShadow) {
+                  const coordKey = `${x},${y}`;
+                  this.grid[x][y].isShadow = false;
+                  this.pushDrawBuffer(x, y);
+                  this.shadowSet.delete(coordKey);
                 }
               }
             }
-            if wave.Dead == wave.Max {
-              next_wave(game)
-              wave.Started = false
-            }
-          }
-
-          next_wave :: proc (game : ^base.Game) {
-            clear(&game.Wave.Entities)
-            game.Wave.Number += 1
-            setup := &base.wave_setups[game.Wave.Number]
-            game.Wave.Max = setup.Greg + setup.Jeffery + setup.Glurb
-            game.Wave.Alive = 0
-            game.Wave.Dead = 0
-            game.Wave.Accumulator = 0
-            game.Wave.Timer = 5 // intermission time
-            game.Wave.Display = fmt.caprintf("Wave: %v", game.Wave.Number)
-            id_index := 0
-            for i in 0 ..< setup.Greg {
-              entity := new_entity(game, .Greg)
-              entity.ID = id_index
-              append(&game.Wave.Entities, entity)
-              id_index += 1
-            }
-            for i in 0 ..< setup.Jeffery {
-              entity := new_entity(game, .Jeffery)
-              entity.ID = id_index
-              append(&game.Wave.Entities, entity)
-              id_index += 1
-            }
-            for i in 0 ..< setup.Glurb {
-              entity := new_entity(game, .Glurb)
-              entity.ID = id_index
-              append(&game.Wave.Entities, entity)
-              id_index += 1
-            }
-          }
-
-          spawn_entity :: proc (game : ^base.Game) {
-            if len(game.Wave.Entities) == 0 do return
-            //index := int(rand.float32_range(0, f32(len(game.Wave.Entities)) - 1))
-            entity := game.Wave.Entities[0]
-            game.Wave.Alive += 1
-            game.Entities[entity.ID] = entity
-            insert_entity(&game.Grid, entity.Position, entity.ID)
-            unordered_remove(&game.Wave.Entities, 0)
-            msg := fmt.aprintf("Spawned: %v", entity.Type)
-            color : rl.Color
-            switch entity.Type {
-            case .Greg: color = rl.BLUE
-            case .Jeffery: color = rl.YELLOW
-            case .Glurb: color = rl.PURPLE
-            }
-            new_notif(msg, {0, -20}, 20, 2, color)
           }
 
       - type: code
-        id: "player-logic"
-        title: "Player Logic"
-        lang: odin
-        description: "Handles the auto-attack cooldown, health regen, taking damage, awarding gold, and ending the game. The attack cooldown uses the wait service."
+        id: "colors-drawing"
+        title: "Colors & Drawing"
+        lang: javascript
+        description: "These functions calculate the color of each tile based on its height and whether it is in shadow. Nowadays I would adhere to DRY techniques and refactor this into helper functions to avoid so much repeated code. The draw buffer and draw functions handle the actual rendering, only redrawing tiles that were marked as changed."
         code: |
-          player_logic :: proc (state : ^base.State, game : ^base.Game, player : ^base.Player) {
-            closest_id := closest_entity(game, 0, 20)
-            if closest_id != -1 { player.Target = &game.Entities[closest_id] } else do player.Target = nil
-            // attack
-            if !player.CoolDown {
-              if player.Target != nil {
-                player.CoolDown = true
-                mc.wait(f64(player.Atk_Speed), proc(){
-                  player := &base.player
-                  player.CoolDown = false
-                })
-                create_projectile(game, player)
-              }
+          setColor(x, y) {
+            let color;
+            let heightValue = this.grid[x][y].val;
+            let { minHeight: wlH, maxHeight: whH, minColor: wlC, maxColor: whC } = this.waterTerrain;
+            let { minHeight: slH, maxHeight: shH, minColor: slC, maxColor: shC } = this.sandTerrain;
+            let { minHeight: glH, maxHeight: ghH, minColor: glC, maxColor: ghC } = this.grassTerrain;
+            let { minHeight: mlH, maxHeight: mhH, minColor: mlC, maxColor: mhC } = this.mountainsTerrain;
+
+            if      (heightValue < wlH)                       { color = 'rgb(30, 176, 251)'; }
+            else if (heightValue >= wlH && heightValue < whH) { color = this.interpolateColor(wlC, whC, (heightValue - wlH) / (whH - wlH)); }
+            else if (heightValue >= slH && heightValue < shH) { color = this.interpolateColor(slC, shC, (heightValue - slH) / (shH - slH)); }
+            else if (heightValue >= glH && heightValue < ghH) { color = this.interpolateColor(glC, ghC, (heightValue - glH) / (ghH - glH)); }
+            else if (heightValue >= mlH && heightValue < mhH) { color = this.interpolateColor(mlC, mhC, (heightValue - mlH) / (mhH - mlH)); }
+            else                                              { color = 'rgb(255, 255, 255)'; }
+
+            this.grid[x][y].sColor = this.shadowColor(color);
+            this.grid[x][y].color = color;
+          }
+
+          interpolateColor(color1, color2, factor) {
+            let [r1, g1, b1] = color1.match(/\d+/g).map(Number);
+            let [r2, g2, b2] = color2.match(/\d+/g).map(Number);
+            let r = Math.round(r1 + factor * (r2 - r1));
+            let g = Math.round(g1 + factor * (g2 - g1));
+            let b = Math.round(b1 + factor * (b2 - b1));
+            return `rgb(${r}, ${g}, ${b})`;
+          }
+
+          shadowColor(col) {
+            const darkness = 60;
+            const rgbValues = col.slice(4, -1).split(',');
+            let r = parseInt(rgbValues[0]);
+            let g = parseInt(rgbValues[1]);
+            let b = parseInt(rgbValues[2]);
+            r = max(r-darkness, 0);
+            g = max(g-darkness, 0);
+            b = max(b-darkness, 0);
+            return `rgb(${r}, ${g}, ${b})`;
+          }
+
+          pushDrawBuffer(x, y) {
+            const exists = this.drawBuffer.some(tile => x === tile.x && y === tile.y);
+            if (!exists) { this.drawBuffer.push({ x, y }); }
+          }
+
+          draw() {
+            for(let i = 0; i < this.drawBuffer.length; i++){
+              let x = this.drawBuffer[i].x;
+              let y = this.drawBuffer[i].y;
+              c.fillStyle = this.grid[x][y].isShadow
+                ? this.grid[x][y].sColor
+                : this.grid[x][y].color;
+              c.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
             }
-            player.Accumulator += state.DT
-            interval : f32 = 1.0
-            for player.Accumulator >= interval {
-              player.Accumulator -= interval
-              player.Health = min(player.Health + player.Regen, player.Max_Health)
-            }
+            this.drawBuffer = [];
           }
 
-          damage_player :: proc (game : ^base.Game, player : ^base.Player, damage : int) {
-            player.Health -= damage
-            if player.Health <= 0 do end_game(game)
-            else do rl.PlaySound(base.damage_sound)
-          }
-
-          end_game :: proc (game : ^base.Game) {
-            game.Over = true
-            rl.PauseMusicStream(base.music_sound)
-            rl.PlaySound(base.explosion_sound)
-            rl.PlaySound(base.game_over_sound)
-          }
-
-          add_gold :: proc (player : ^base.Player, amount : int) {
-            player.Gold += amount
-            msg := fmt.aprintf("+%v Gold", amount)
-            new_notif(msg, {0, -20}, 20, 2, rl.GOLD)
-            rl.PlaySound(base.gold_sound)
-          }
-
+  - title: "Noise"
+    accent: "Generator"
+    label: "Perlin Noise"
+    id: "noise-generator"
+    blocks:
       - type: code
-        id: "upgrade-input"
-        title: "Upgrade Logic — Input Handler"
-        lang: odin
-        description: "Reads number key presses and routes to the right upgrade, checking funds before purchasing and putting upgrades on a short cooldown to prevent spamming. There's a lot of repeated code here that I'd collapse into one generic function nowadays."
+        id: "noise-constructor"
+        title: "PerlinNoise - Constructor & Helpers"
+        lang: javascript
+        description: "The constructor and initializer for the noise generator. randVect() and dotProd() are the core math needed for the Perlin algorithm, and smoothStep() and interp() handle the smooth interpolation between grid corners."
         code: |
-          upgrade_logic :: proc (game : ^base.Game, player : ^base.Player) {
-            if rl.IsKeyPressed(.ONE) {
-              if player.Upgrades.CoolDown{
-                new_notif("Cooldown!", {0, -20}, 20, 2, rl.RED)
-                return
-              }
-              if _check_funds(player.Gold, player.Upgrades.DMG_Cost) {
-                _purchase(player, player.Upgrades.DMG_Cost)
-                upgrade_damage(game, player)
-              }
+          class PerlinNoise {
+            constructor(width, height) {
+              this.width = width;
+              this.height = height;
+              this.grid = [];
+              this.initialize();
             }
-            if rl.IsKeyPressed(.TWO) {
-              if player.Upgrades.CoolDown{
-                new_notif("Cooldown!", {0, -20}, 20, 2, rl.RED)
-                return
-              }
-              if _check_funds(player.Gold, player.Upgrades.SPD_Cost) {
-                _purchase(player, player.Upgrades.SPD_Cost)
-                upgrade_atk_speed(game, player)
-              }
-            }
-            if rl.IsKeyPressed(.THREE) {
-              if player.Upgrades.CoolDown{
-                new_notif("Cooldown!", {0, -20}, 20, 2, rl.RED)
-                return
-              }
-              if _check_funds(player.Gold, player.Upgrades.HP_Cost) {
-                _purchase(player, player.Upgrades.HP_Cost)
-                upgrade_hp(game, player)
-              }
-            }
-            if rl.IsKeyPressed(.FOUR) {
-              if player.Upgrades.CoolDown{
-                new_notif("Cooldown!", {0, -20}, 20, 2, rl.RED)
-                return
-              }
-              if _check_funds(player.Gold, player.Upgrades.Regen_Cost) {
-                _purchase(player, player.Upgrades.Regen_Cost)
-                upgrade_regen(game, player)
-              }
-            }
-            _purchase :: proc (player : ^base.Player, cost : int) {
-              player.Gold -= cost
-              player.Upgrades.CoolDown = true
-              rl.PlaySound(base.upgrade_sound)
-              mc.wait(1, proc(){
-                base.player.Upgrades.CoolDown = false
-              })
-            }
-            _check_funds :: proc (gold, cost : int) -> bool {
-              if gold < cost {
-                new_notif("Not Enough Gold!", {0, -20}, 20, 2, rl.RED)
-                rl.PlaySound(base.error_sound)
-              }
-              return gold >= cost
-            }
-          }
 
-      - type: code
-        id: "upgrade-functions"
-        title: "Upgrade Logic — Upgrade Functions"
-        lang: odin
-        description: "Each upgrade increments its level, scales the cost, and applies the stat change. Probably a clean way to collapse all four of these into one function, something I'd try now."
-        code: |
-          upgrade_damage :: proc (game : ^base.Game, player : ^base.Player) {
-            player.Upgrades.DMGLVL += 1
-            player.Upgrades.DMG_Cost = player.Upgrades.DMGLVL * 20
-            player.Damage += min(player.Upgrades.DMGLVL, 4)
-            new_notif("Damage Upgraded!", {0, -20}, 20, 2, rl.PINK)
-          }
-
-          upgrade_atk_speed :: proc (game : ^base.Game, player : ^base.Player) {
-            player.Upgrades.SPDLVL += 1
-            player.Upgrades.SPD_Cost = player.Upgrades.SPDLVL * 20
-            player.Atk_Speed = max(player.Atk_Speed - (f32(player.Upgrades.SPDLVL) * 0.01), 0.05)
-            new_notif("Attack Speed Upgraded!", {0, -20}, 20, 2, rl.PINK)
-          }
-
-          upgrade_hp :: proc (game : ^base.Game, player : ^base.Player) {
-            player.Upgrades.HPLVL += 1
-            player.Upgrades.HP_Cost = player.Upgrades.HPLVL * 15
-            player.Max_Health = 10 + player.Upgrades.SPDLVL * 5
-            new_notif("Max Health Upgraded!", {0, -20}, 20, 2, rl.PINK)
-          }
-
-          upgrade_regen :: proc (game : ^base.Game, player : ^base.Player) {
-            player.Upgrades.RegenLVL += 1
-            player.Upgrades.Regen_Cost = player.Upgrades.RegenLVL * 20
-            player.Regen += min(player.Upgrades.RegenLVL * 2, 5)
-            new_notif("Regen Upgraded!", {0, -20}, 20, 2, rl.PINK)
-          }
-
-      - type: code
-        id: "camera-logic"
-        title: "Camera Logic"
-        lang: odin
-        description: "Handles rotating the isometric camera with middle mouse drag and zooming with scroll wheel. Zoom speed scales down as you get close to the minimum to avoid clipping through the ground."
-        code: |
-          camera_logic :: proc (camera : base.Camera, settings : base.Settings) -> (rl.Camera3D, base.Camera) {
-            cam     : rl.Camera3D
-            config  := camera
-            config.Forward = rl.Vector3Normalize({
-              math.sin(config.Yaw) * math.cos(config.Pitch),
-              math.sin(config.Pitch),
-              math.cos(config.Yaw) * math.cos(config.Pitch)
-            })
-            config.Right = mc.Vec3{ math.cos(config.Yaw), 0, -math.sin(config.Yaw) }
-            config.Up = rl.Vector3CrossProduct(config.Right, config.Forward)
-            // rotate logic
-            if rl.IsMouseButtonDown(.MIDDLE) {
-              mouse_dx := rl.GetMouseDelta().x * settings.Sensitivity
-              mouse_dy := rl.GetMouseDelta().y * settings.Sensitivity
-              config.Yaw -= mouse_dx * mc.RAD
-              config.Pitch += mouse_dy * mc.RAD
-              config.Pitch = math.clamp(config.Pitch, 0.1, math.PI * 0.49) // avoid flipping & clipping through ground
+            initialize() {
+              for (let i = 0; i < this.width; i++) {
+                this.grid[i] = new Array(this.height).fill(0);
+              }
             }
-            // zoom logic
-            scroll := rl.GetMouseWheelMove()
-            if scroll != 0 {
-              if config.Zoom < config.Min_Zoom + 5 {
-                config.Zoom -= scroll * max(config.Min_Zoom_Speed, config.Max_Zoom_Speed * (math.abs(config.Zoom - config.Min_Zoom) * 0.1))
+
+            randVect() {
+              let theta = Math.random() * 2 * Math.PI;
+              return { x: Math.cos(theta), y: Math.sin(theta) };
+            }
+
+            dotProd(x, y, vx, vy) {
+              let gVect;
+              let dVect = { x: x - vx, y: y - vy };
+              if (this.gradients[[vx, vy]]) {
+                gVect = this.gradients[[vx, vy]];
               } else {
-                config.Zoom -= scroll * config.Max_Zoom_Speed
+                gVect = this.randVect();
+                this.gradients[[vx, vy]] = gVect;
               }
-              if config.Zoom < config.Min_Zoom { config.Zoom = config.Min_Zoom }
-              if config.Zoom > config.Max_Zoom { config.Zoom = config.Max_Zoom }
+              return dVect.x * gVect.x + dVect.y * gVect.y;
             }
-            // update the config's position
-            config.Position = {
-              config.Zoom * math.sin(config.Yaw) * math.cos(config.Pitch),
-              config.Zoom * math.sin(config.Pitch),
-              config.Zoom * math.cos(config.Yaw) * math.cos(config.Pitch)
+
+            smoothStep(x) { return (6 * x ** 5) - (15 * x ** 4) + (10 * x ** 3); }
+            interp(x, a, b) { return a + this.smoothStep(x) * (b - a); }
+
+      - type: code
+        id: "noise-generate"
+        title: "PerlinNoise - Generation"
+        lang: javascript
+        description: "These functions actually generate the noise map using a lot of math. seed() clears the caches so each generation is fresh. get() samples a single point and caches the result. generateNoise() fills the whole grid by running each point through fractalBrownianMotion(), which layers multiple octaves of noise to produce a more natural result."
+        code: |
+          seed() {
+            this.gradients = {};
+            this.memory = {};
+          }
+
+          get(x, y) {
+            if (this.memory.hasOwnProperty([x, y])) { return this.memory[[x, y]]; }
+            let xf = floor(x);
+            let yf = floor(y);
+            let tl = this.dotProd(x, y, xf, yf);
+            let tr = this.dotProd(x, y, xf + 1, yf);
+            let bl = this.dotProd(x, y, xf, yf + 1);
+            let br = this.dotProd(x, y, xf + 1, yf + 1);
+            let xt = this.interp(x - xf, tl, tr);
+            let xb = this.interp(x - xf, bl, br);
+            let v = this.interp(y - yf, xt, xb);
+            v = (v + 1) / 2;
+            this.memory[[x, y]] = v;
+            return v;
+          }
+
+          generateNoise(numOctaves = 5) {
+            this.seed();
+            for (let x = 0; x < this.width; x++) {
+              for (let y = 0; y < this.height; y++) {
+                let noiseValue = this.fractalBrownianMotion(x * zoomFactor, y * zoomFactor, numOctaves);
+                this.grid[x][y] = noiseValue;
+              }
             }
-            // set a new camera
-            cam = {
-              config.Position,
-              0,
-              { 0, 1, 0 },
-              settings.FOV,
-              .PERSPECTIVE
+          }
+
+          fractalBrownianMotion(x, y, numOctaves) {
+            let total = 0;
+            let amplitude = 1.0;
+            let maxAmplitude = 0;
+            let frequency = 1.0;
+            for (let i = 0; i < numOctaves; i++) {
+              total += this.get(x * frequency, y * frequency) * amplitude;
+              maxAmplitude += amplitude;
+              amplitude *= 0.5;
+              frequency *= 2.0;
             }
-            return cam, config
+            return total / maxAmplitude;
+          }
+
+  - title: "Brush"
+    accent: "Script"
+    label: "Brush System"
+    id: "brush-script"
+    blocks:
+      - type: code
+        id: "brush-constructor"
+        title: "Brush - Constructor & Outline"
+        lang: javascript
+        description: "The constructor for the brush handles its parameters. outlineRender() draws the pixelated circle of the brush on a separate overlay canvas so it doesn't interfere with the terrain canvas."
+        code: |
+          class Brush {
+            constructor() {
+              this.x = 0;
+              this.y = 0;
+              this.radius = 10;
+              this.mode = 'erode';
+              this.change = 0.005;
+            }
+
+            outlineRender() {
+              for (let r = 0; r <= floor(this.radius * sqrt(0.5)); r++) {
+                let d = floor(sqrt(this.radius ** 2 - r * r));
+                o.fillStyle = 'black'
+                o.fillRect((this.x - d) * tileSize, (this.y + r) * tileSize, tileSize, tileSize);
+                o.fillRect((this.x + d) * tileSize, (this.y + r) * tileSize, tileSize, tileSize);
+                o.fillRect((this.x - d) * tileSize, (this.y - r) * tileSize, tileSize, tileSize);
+                o.fillRect((this.x + d) * tileSize, (this.y - r) * tileSize, tileSize, tileSize);
+                o.fillRect((this.x + r) * tileSize, (this.y - d) * tileSize, tileSize, tileSize);
+                o.fillRect((this.x + r) * tileSize, (this.y + d) * tileSize, tileSize, tileSize);
+                o.fillRect((this.x - r) * tileSize, (this.y - d) * tileSize, tileSize, tileSize);
+                o.fillRect((this.x - r) * tileSize, (this.y + d) * tileSize, tileSize, tileSize);
+              }
+            }
+
+      - type: code
+        id: "brush-use"
+        title: "use()"
+        lang: javascript
+        description: "This function switches the current brush mode between the options. Nowadays I probably would have used something like the strategy pattern instead of a switch statement."
+        code: |
+          use() {
+            if (mouse.down && this.withinBounds()) {
+              switch (this.mode) {
+                case 'erode':   ...; break;
+                case 'build':   ...; break;
+                case 'smooth':  ...; break;
+                case 'flatten': ...; break;
+              }
+              newTerrain.updateShadows(this.x - this.radius, this.y - this.radius, this.x + this.radius, this.y + this.radius);
+              newTerrain.draw();
+              newTerrain.drawBuffer = [];
+            }
           }
 
       - type: code
-        id: "projectile-logic"
-        title: "Projectile Logic"
-        lang: odin
-        description: "create_projectile() fires a projectile toward the current target. projectile_logic() steps each one forward and checks for hits using the spatial hash map. The collision detection here is pretty rough, something I'd redo with a cleaner approach."
+        id: "brush-modes"
+        title: "Brush Modes"
+        lang: javascript
+        description: "The four brush modes. Erode lowers the tile's height value, build raises it, smooth smooths out the gradient between neighboring tiles, and flatten flattens all tiles within the brush to the height of the tile at the brush center."
         code: |
-          create_projectile :: proc (game : ^base.Game, player : ^base.Player) {
-            projectile : base.Projectile
-            projectile.Position = {0, 0.75, 0}
-            projectile.Velocity = mc.direction_between(projectile.Position, player.Target.Position) * player.Proj_Speed
-            projectile.Velocity.y = 0
-            append(&game.Projectiles, projectile)
-            rl.PlaySound(base.shoot_sound)
-          }
+          case 'erode':
+            this.getTiles((x, y) => {
+              let dist = calcDist(brush.x, brush.y, x, y);
+              let change = brush.change / ((dist / 4) + 1)
+              newTerrain.grid[x][y].val = max(newTerrain.grid[x][y].val - change, 0);
+              newTerrain.setColor(x, y);
+              newTerrain.pushDrawBuffer(x, y);
+            }); break;
 
-          projectile_logic :: proc (state : ^base.State, game : ^base.Game, player : ^base.Player) {
-            for &projectile, index in game.Projectiles {
-              closest_id := closest_entity(game, projectile.Position, 4)
-              target : ^base.Entity
-              if closest_id != -1 { target = &game.Entities[closest_id] } else do target = nil
-              distance : f32
-              distance_zero_target : f32
-              distance_zero_proj : f32
-              collision_course : bool
-              hit := false
-              if target != nil {
-                distance_zero_target = mc.distance_between(mc.Vec2{target.Position.x, target.Position.z}, 0)
-                collision_course = mc.dot(projectile.Velocity,target.Position - projectile.Position) > 0.98
-              }
-              n_velocity := projectile.Velocity / 5
-              for i in 0 ..< 5 {
-                distance_zero_proj = mc.distance_between(mc.Vec2{projectile.Position.x, projectile.Position.z}, 0)
-                if target != nil {
-                  distance = mc.distance_between(mc.Vec2{target.Position.x, target.Position.z}, mc.Vec2{projectile.Position.x, projectile.Position.z})
-                  if (distance <= 1 || distance_zero_proj >= distance_zero_target) && collision_course {
-                    hit = true
+          case 'build':
+            this.getTiles((x, y) => {
+              let dist = calcDist(brush.x, brush.y, x, y);
+              let change = brush.change / ((dist / 4) + 1)
+              newTerrain.grid[x][y].val = min(newTerrain.grid[x][y].val + change, 1);
+              newTerrain.setColor(x, y);
+              newTerrain.pushDrawBuffer(x, y);
+            }); break;
+
+          case 'smooth':
+            this.getTiles((x, y) => {
+              let total = 0, count = 0;
+              for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                  if (i === 0 && j === 0) continue;
+                  if (x+i >= 0 && x+i < newTerrain.width && y+j >= 0 && y+j < newTerrain.height) {
+                    total += newTerrain.grid[x+i][y+j].val;
+                    count++;
                   }
                 }
-                new_pos := projectile.Position + n_velocity * state.DT
-                projectile.Position = new_pos
               }
-              if hit {
-                target.Health -= player.Damage
-                unordered_remove(&game.Projectiles, index)
+              if (count === 0) return;
+              let tile = newTerrain.grid[x][y];
+              let average = total / count;
+              let newChange = tile.val > average ? -this.change / 3 : this.change / 3;
+              tile.val = tile.val + newChange < average - newChange
+                ? Math.min(average, tile.val + newChange)
+                : Math.max(average, tile.val + newChange);
+              if ((tile.val > average && tile.val <= average + this.change / 3) ||
+                  (tile.val < average && tile.val >= average - this.change / 3)) {
+                tile.val = average;
               }
-              if distance_zero_proj >= 40 do unordered_remove(&game.Projectiles, index)
-            }
-          }
+              newTerrain.setColor(x, y);
+              newTerrain.pushDrawBuffer(x, y);
+            }); break;
+
+          case 'flatten':
+            this.getTiles((x, y) => {
+              if (x === this.x && y === this.y) return;
+              const tile = newTerrain.grid[x][y];
+              let target = newTerrain.grid[this.x][this.y].val;
+              let newChange = tile.val > target ? -this.change / 2 : this.change / 2;
+              tile.val = tile.val + newChange < target - newChange
+                ? Math.min(target, tile.val + newChange)
+                : Math.max(target, tile.val + newChange);
+              if ((tile.val > target && tile.val <= target + this.change / 2) ||
+                  (tile.val < target && tile.val >= target - this.change / 2))
+                tile.val = target;
+              newTerrain.setColor(x, y);
+              newTerrain.pushDrawBuffer(x, y);
+            }); break;
 
       - type: code
-        id: "notif-logic"
-        title: "Notification Logic"
-        lang: odin
-        description: "notif_logic() removes notifications once their lifetime expires. new_notif() creates a new one, pushes older ones up the screen, and caps the stack at 5."
+        id: "get-tiles"
+        title: "getTiles() & insideCircle()"
+        lang: javascript
+        description: "These functions are responsible for fetching the tiles within the brush's area."
         code: |
-          notif_logic :: proc (state : ^base.State, game : ^base.Game) {
-            notifs := &game.Notifications
-            for &e, i in notifs {
-              if e.Life <= state.Game_Time {
-                ordered_remove(notifs, i)
-                continue
+          getTiles(action) {
+            let top    = ceil(this.y - this.radius),
+                bottom = floor(this.y + this.radius),
+                left   = ceil(this.x - this.radius),
+                right  = floor(this.x + this.radius);
+            for (let y = top; y <= bottom; y++) {
+              for (let x = left; x <= right; x++) {
+                if (this.insideCircle(this.x, this.y, x, y, this.radius) &&
+                    x >= 0 && x < newTerrain.width &&
+                    y >= 0 && y < newTerrain.height) {
+                  action(x, y)
+                }
               }
             }
           }
 
-          new_notif :: proc (msg : string, pos: mc.Vec2i, size, life : i32, color : rl.Color) {
-            game := &base.game
-            state := &base.state
-            notif : base.Notification
-            text := fmt.ctprintf(msg)
-            time := state.Game_Time + f64(life)
-            notif.Position = pos
-            notif.Size = size
-            notif.Life = time
-            notif.Color = color
-            notif.Text = text
-            for &e, i in game.Notifications {
-              e.Position.y -= size + 10
-            }
-            if len(game.Notifications) >= 5 {
-              ordered_remove(&game.Notifications, 0)
-            }
-            append(&game.Notifications, notif)
+          insideCircle(x1, y1, x2, y2, radius) {
+            let dx = x1 - x2, dy = y1 - y2;
+            return dx * dx + dy * dy <= radius * radius;
           }
 
   - title: "Final"
@@ -1354,5 +655,5 @@ sections:
       - type: text
         id: "final-note"
         paragraphs:
-          - "Building this game taught me a lot about lower level coding, memory management, and how games work without an engine handling everything for you. Not using a game engine is a challenging experience I think every aspiring game developer should try at least once. The code is far from perfect and there's plenty I'd do differently now, but it was a genuinely good learning experience."
+          - "This was a fun and decently challenging project, especially when it came to creating the brush modes and custom lighting. A lot of this code is pretty bad though, and nowadays I would go about this project in a very different manner, especially with my file and class structures which are currently a nightmare to work with. I'd love to revisit this project in the future and use better coding habits and some design patterns, like the OOP strategy pattern for the brush modes."
 ---
