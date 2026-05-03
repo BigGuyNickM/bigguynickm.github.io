@@ -2,11 +2,11 @@
 layout: post
 title: "Tower Defense"
 date: 2025-05-09
-private: false
 category: game
 featured: false
-thumbnail: "PLACEHOLDER/3.gif"
-description: "A semester project for my 3D Game Design class — a tower defense game with 3 enemy types and an upgrade system, coded in Odin-lang using Raylib and a custom utility package I built from scratch."
+hero_animated: true
+thumbnail: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1777832305/Tower_Defense_Final_Build_yoccto.webp"
+description: "This is a semester project for my 3D Game Design class, a tower defense game with 3 enemy types and an upgrade system, coded in Odin-lang using Raylib and a custom utility package I built from scratch."
 
 details:
   Programs Used: "Odin-lang, Raylib"
@@ -71,40 +71,45 @@ sections:
     label: "Dev Progression"
     id: "visual-process"
     blocks:
+      - type: warning
+        id: "warning"
+        title: "HEADS UP"
+        description: "This is an old project, so expect the code to be really messy and unoptimized. Nonetheless, I still felt like this is worth sharing."
+
       - type: image
         id: "step-1"
-        title: "Step 1 — Core Systems"
-        src: "PLACEHOLDER/1.gif"
+        title: "Step 1: Core Systems"
+        src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1777832306/Tower_Defense_First_Build_qavlx7.webp"
         alt: "Core enemy and tower systems"
         animated: true
-        description: "Started by setting up the core systems — enemies that walk toward the center and a tower that automatically shoots at them."
+        description: "Started by setting up the core systems; enemies that walk toward the center and a tower that automatically shoots at them."
 
       - type: image
         id: "step-2"
-        title: "Step 2 — Waves & Gold"
-        src: "PLACEHOLDER/2.gif"
+        title: "Step 2: Waves & Gold"
+        src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1777832307/Tower_Defense_Second_Build_aknjxl.webp"
         alt: "Wave and gold systems"
         animated: true
         description: "Added waves that get progressively harder, and enemies now drop gold on death."
 
       - type: image
         id: "step-3-enemies"
-        title: "Step 3 — Enemy Assets"
-        src: "PLACEHOLDER/characters.png"
+        title: "Step 3: Enemy Assets"
+        src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1777832302/Tower_Defense_Character_Assets_czpm92.webp"
         alt: "3 enemy models"
-        description: "Modeled the three enemy types — Greg, Jeffery, and Glurb. Went for a goofy look."
+        description: "Modeled the three enemy types; Greg, Jeffery, and Glurb. Went for a goofy look."
 
       - type: image
         id: "step-4-env"
-        title: "Step 4 — Environment Assets"
-        src: "PLACEHOLDER/environment_assets.png"
+        title: "Step 4: Environment Assets"
+        src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1777832304/Tower_Defense_Environment_Assets_rnhd4i.webp"
         alt: "Environment assets"
         description: "Modeled the environment assets and dropped them into the scene."
 
       - type: image
         id: "step-5-final"
-        title: "Step 5 — All Together"
-        src: "PLACEHOLDER/3.gif"
+        title: "Step 5: All Together"
+        src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1777832305/Tower_Defense_Final_Build_yoccto.webp"
         alt: "Final gameplay"
         animated: true
         description: "Imported all the assets, added health and upgrades to the tower, and put together a notification system."
