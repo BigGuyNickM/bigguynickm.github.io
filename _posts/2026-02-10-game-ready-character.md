@@ -44,6 +44,7 @@ sections:
       - type: image
         id: "reference"
         title: "Reference Drawing"
+        max_height: 600px
         src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773370647/Game-Ready-Character_char_ref_wfnumu.webp"
         description: "I wanted to go for a very cartoony body type, so I drew it kind of stocky and rounded off."
 
@@ -64,6 +65,7 @@ sections:
         id: "remodel"
         title: "Remodel"
         columns: 2
+        max_width: 800px
         description: "I remodeled the character to be overall higher poly, but still conserving most of the poly count towards the shape and silhouette. I wanted a more refined look overall, with cleaner topology and better defined forms compared to the rough."
         images:
           - src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773370328/Game-Ready-Character_Refined_1_iplcnz.webp"
@@ -80,13 +82,14 @@ sections:
       - type: gallery
         id: "texture-views"
         columns: 2
+        max_width: 600px
         images:
           - src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773370306/Game-Ready-Character_Body_Tex_m9bggq.webp"
             alt: "Body texture view 1"
-          - src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773370310/Game-Ready-Character_Body_Tex_2_btu8tf.webp"
-            alt: "Body texture view 2"
           - src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773370298/Game-Ready-Character_Arm_Tex_1_ferom4.webp"
             alt: "Arm texture view 1"
+          - src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773370310/Game-Ready-Character_Body_Tex_2_btu8tf.webp"
+            alt: "Body texture view 2"
           - src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773370302/Game-Ready-Character_Arm_Tex_2_dydloq.webp"
             alt: "Arm texture view 2"
 
@@ -98,6 +101,7 @@ sections:
       - type: image
         id: "rig"
         title: "Rig"
+        max_height: 600px
         src: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773370265/Game-Ready-Character_Rig_bybh0j.webp"
         description: "I set up a simple rig in Blender with basic leg IK controls. Nothing too complex, just enough to get clean deformations and make the animation process manageable. It was also interesting dealing with deformations at such a low poly count, I had to manually triangulate most of the rig to ensure it looked correct when posed."
 

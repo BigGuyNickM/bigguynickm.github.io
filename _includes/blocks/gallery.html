@@ -11,11 +11,13 @@
   {% assign cols = 3 %}
 {% endif %}
 
-<div class="block block--gallery" id="{{ block.id }}">
+{% capture block_style %}{% if block.max_height %}--max-h: {{ block.max_height }};{% endif %}{% if block.max_width %}--max-w: {{ block.max_width }};{% endif %}{% endcapture %}
+<div class="block block--gallery{% if block.max_height %} block--gallery-capped{% endif %}" id="{{ block.id }}"{% if block_style != "" %} style="{{ block_style }}"{% endif %}>
   {% if block.title %}
     <h3 class="block-title">{{ block.title }}</h3>
   {% endif %}
 
+  <div class="block-media">
   <div class="block-gallery-grid block-gallery-grid--{{ cols }}">
     {% for image in block.images %}
       {% if image.animated %}
@@ -32,6 +34,7 @@
         <img src="{{ opt_src }}" alt="{{ image.alt }}" class="block-gallery-img" loading="lazy">
       </a>
     {% endfor %}
+  </div>
   </div>
 
   {% if block.description %}

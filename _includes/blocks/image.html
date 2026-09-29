@@ -1,4 +1,4 @@
-<div class="block block--image" id="{{ block.id }}">
+<div class="block block--image" id="{{ block.id }}"{% if block.max_height %} style="--max-h: {{ block.max_height }}"{% endif %}>
   {% if block.title %}
     <h3 class="block-title">{{ block.title }}</h3>
   {% endif %}
@@ -11,9 +11,11 @@
     {% assign lightbox_src = block.src | replace: '/upload/', '/upload/f_auto,q_auto,w_2400/' %}
   {% endif %}
 
+  <div class="block-media">
   <a class="lightbox-trigger" data-src="{{ lightbox_src }}" data-alt="{{ block.alt | default: block.title }}" aria-label="{{ block.alt | default: block.title }}">
     <img src="{{ opt_src }}" alt="{{ block.alt | default: block.title }}" class="block-image-img" loading="lazy">
   </a>
+  </div>
 
   {% if block.description %}
     <p class="block-description">{{ block.description }}</p>

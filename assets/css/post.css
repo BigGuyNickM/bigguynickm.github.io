@@ -83,4 +83,4 @@
 
 .post-section-header { display: flex; flex-direction: column; gap: var(--gap-xs); }
 .post-section-content { display: flex; flex-direction: column; gap: var(--gap-xl); }
-.post-section-content > .block { margin: 0; }
+.post-section-content > .block { margin-block: 0; }
