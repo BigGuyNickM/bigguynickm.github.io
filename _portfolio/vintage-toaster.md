@@ -3,7 +3,7 @@ layout: portfolio-post
 title: "Vintage Toaster"
 date: 2025-11-19
 category: 3d
-priority: 3
+priority: 2
 thumbnail: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773342702/Vintage_Toaster_Final_Render_s4cgix.jpg"
 blog_post: "vintage-toaster"
 description: "A stylized vintage toaster for my Advanced Modeling class. This was my first time doing a full project entirely as a Sub-D model from start to finish."

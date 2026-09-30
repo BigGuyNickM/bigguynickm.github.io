@@ -3,7 +3,7 @@ layout: portfolio-post
 title: "Product Ad"
 date: 2025-09-25
 category: 3d
-featured: false
+priority: 3
 thumbnail: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1773359175/Product-Ad_FinalProduct_vdl2yr.webp"
 blog_post: "product-ad"
 description: "A bottle modeled in Maya for my Advanced Modeling class, textured with Maya's aiStandardSurface and Photoshop, then rendered and composited into a finished product ad."
