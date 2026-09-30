@@ -23,7 +23,7 @@
 
 .carousel-item {
   flex-shrink: 0;
-  width: 410px;
+  width: 320px;
   transition:
     transform var(--trans-fast) cubic-bezier(0.45, 0, 0.55, 1),
     opacity  var(--trans-fast) ease;
@@ -57,8 +57,8 @@
 }
 .carousel-dot.active { width: 50px; background: var(--yellow); }
 
-@media (max-width: 1100px) { .carousel-item { width: 340px; } }
-@media (max-width: 600px)  { .carousel-item { width: 280px; } }
+@media (max-width: 1100px) { .carousel-item { width: 280px; } }
+@media (max-width: 600px)  { .carousel-item { width: 240px; } }
 
 /* no mask when single card or on narrow screens */
 .carousel-wrapper.no-mask { -webkit-mask-image: none; mask-image: none; }

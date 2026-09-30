@@ -47,8 +47,17 @@
 
   {% if page.body_class == 'page-home' %}
   <script src="{{ '/assets/js/hero.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/gallery.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/portfolio-grid.js' | relative_url }}"></script>
+  {% endif %}
+
+  {% if page.body_class == 'page-blog' %}
   <script src="{{ '/assets/js/carousel.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/gallery.js' | relative_url }}"></script>
+  {% endif %}
+
+  {% if page.layout == 'portfolio-post' %}
+  <script src="{{ '/assets/js/post.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/lightbox.js' | relative_url }}"></script>
   {% endif %}
 
   {% if page.layout == 'post' %}

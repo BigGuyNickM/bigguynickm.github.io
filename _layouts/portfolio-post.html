@@ -1,0 +1,21 @@
+---
+layout: default
+body_class: page-post
+---
+
+{% include post-hero.html %}
+
+{% assign blog = site.posts | where: "slug", page.blog_post | first %}
+
+<section class="post-section">
+  {% if blog %}
+    <div>
+      <a href="{{ blog.url | relative_url }}{% if page.blog_anchor %}#{{ page.blog_anchor }}{% endif %}" class="btn">Read the full breakdown →</a>
+    </div>
+  {% endif %}
+  <div class="post-section-content">
+    {% for block in page.blocks %}
+      {% include blocks/{{ block.type }}.html block=block %}
+    {% endfor %}
+  </div>
+</section>

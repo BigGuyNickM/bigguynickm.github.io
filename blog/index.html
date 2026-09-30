@@ -1,0 +1,75 @@
+---
+layout: default
+title: Blog
+body_class: page-blog
+---
+
+{% assign public_posts = site.posts | where_exp: "item", "item.private != true" %}
+
+{% assign featured_posts = public_posts | where: "featured", true %}
+{% if featured_posts.size > 0 %}
+<section class="section" id="featured">
+  {% include section-heading.html label="Featured" title="Project" accent="Highlights" %}
+  <div class="section-content">
+    <div class="carousel-wrapper">
+      <div class="carousel-track" id="carousel">
+        {% assign count = featured_posts.size %}
+
+        {% if count > 1 %}
+          {% for i in (1..3) %}
+            {% assign idx = count | minus: 4 | plus: i %}
+            {% assign item = featured_posts[idx] %}
+            <div class="carousel-item">{% include post-card.html url=item.url title=item.title category=item.category thumbnail=item.thumbnail date=item.date animated=item.hero_animated %}</div>
+          {% endfor %}
+        {% endif %}
+
+        {% for item in featured_posts %}
+          <div class="carousel-item">{% include post-card.html url=item.url title=item.title category=item.category thumbnail=item.thumbnail date=item.date animated=item.hero_animated %}</div>
+        {% endfor %}
+
+        {% if count > 1 %}
+          {% for i in (0..2) %}
+            {% assign item = featured_posts[i] %}
+            <div class="carousel-item">{% include post-card.html url=item.url title=item.title category=item.category thumbnail=item.thumbnail date=item.date animated=item.hero_animated %}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div class="carousel-indicators" id="carousel-indicators">
+        {% for item in featured_posts %}
+          <button class="carousel-dot {% if forloop.first %}active{% endif %}" data-idx="{{ forloop.index0 }}" aria-label="Go to slide {{ forloop.index }}"></button>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section" id="posts">
+  {% include section-heading.html label="Blog" title="Project" accent="Posts" %}
+  <div class="section-content">
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="game">Games</button>
+      <button class="filter-btn" data-filter="coding">Code</button>
+      <button class="filter-btn" data-filter="3d">3D Art</button>
+      <button class="filter-btn" data-filter="photography">Photography</button>
+      <button class="filter-btn" data-filter="design">Design</button>
+    </div>
+
+    <div class="posts-grid">
+      {% for post in public_posts %}
+        {% include post-card.html
+          url=post.url
+          title=post.title
+          category=post.category
+          thumbnail=post.thumbnail
+          date=post.date
+          animated=post.hero_animated
+        %}
+      {% endfor %}
+    </div>
+    <div class="gallery-footer">
+      <button class="btn" id="show-more-btn">Show More Work ↓</button>
+    </div>
+  </div>
+</section>

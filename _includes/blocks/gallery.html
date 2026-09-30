@@ -11,7 +11,7 @@
   {% assign cols = 3 %}
 {% endif %}
 
-{% capture block_style %}{% if block.max_height %}--max-h: {{ block.max_height }};{% endif %}{% if block.max_width %}--max-w: {{ block.max_width }};{% endif %}{% endcapture %}
+{% capture block_style %}{% if block.max_height %}--max-h: {{ block.max_height }};{% endif %}{% if block.max_width %}--gal-max-w: {{ block.max_width }};{% endif %}{% endcapture %}
 <div class="block block--gallery{% if block.max_height %} block--gallery-capped{% endif %}" id="{{ block.id }}"{% if block_style != "" %} style="{{ block_style }}"{% endif %}>
   {% if block.title %}
     <h3 class="block-title">{{ block.title }}</h3>

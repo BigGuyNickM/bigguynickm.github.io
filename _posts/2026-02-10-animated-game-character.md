@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Game Ready Character"
+title: "Animated Game Character"
 date: 2026-02-10
 category: 3d
 featured: true
