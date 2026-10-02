@@ -1,16 +1,16 @@
 ---
 layout: portfolio-post
-title: "Paper Generator"
-date: 2026-10-01
+title: "Paper Generator Addon"
+date: 2026-06-01
 category: coding
 priority: 1
 hero_animated: true
 thumbnail: "https://res.cloudinary.com/dbmhdbjxa/image/upload/v1790909583/Paper_Generator_Showcase_jjlfm0.webp"
-blog_post: "paper-generator"
-description: "A Blender add-on that turns a PDF or a folder of images into 3D pages, then scatters them along a curve or inside a shape."
+description: "A Blender add-on that turns a PDF or a folder of images into 3D pages, then scatters them along a curve or inside a shape. I made this addon while interning at Emulsion Pictures, an indie studio making a short film. This addon was created to speed up the production process of a specific part of the film."
 
 details:
-  Programs Used: "Python, Blender 5.2"
+  Languages Used: "Python"
+  Programs Used: "Blender 5.2"
 
 blocks:
   - type: text
